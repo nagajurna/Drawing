@@ -25,6 +25,11 @@ nav {
 	width: 100%;
 	min-height: 50px;
 	background-color: #333;
+	text-align: center;
+}
+
+#controls {
+	margin-top: 12px;
 }
 
 #container {
@@ -124,21 +129,22 @@ body.image #seHandle, body.image #nwHandle {
 	display: none;
 }
 
-.controls {
+.control {
 /*
 	position: absolute;
 	right: 10px;
 */
 	width: auto;
-	height: auto;
-	padding: 2px;
+	height: 28px;
+	padding: 3px;
+	margin-left: 1px;
+	margin-right: 1px;
+	box-sizing: border-box;
 }
 
 
 #save {
-/*
-	top: 50px
-*/
+	width: 88px
 }
 
 #new {
@@ -153,9 +159,7 @@ body.image #seHandle, body.image #nwHandle {
 	position: absolute;
 	right: 10px;
 */
-	width: auto;
-	height: auto;
-	padding: 2px;
+	
 }
 
 #strokeStyleSelect {
@@ -164,8 +168,6 @@ body.image #seHandle, body.image #nwHandle {
 	position: absolute;
 	right: 10px;
 */
-	width: auto;
-	height: auto;
-	padding: 2px;
+	
 }
 

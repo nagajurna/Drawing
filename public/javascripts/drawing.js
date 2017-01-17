@@ -141,15 +141,13 @@ var im = false;
 saveBtn.addEventListener('click', function(e) {
 	if(im===false) {	
 		image.src = ctx.canvas.toDataURL('image/png');
-		//image.width = ctx.canvas.width;
-		//image.height = ctx.canvas.height; 
 		document.body.className = "image";
-		e.target.innerHTML = "Convert to drawing";
+		e.target.innerHTML = "To drawing";
 		im = true;
 		
 	} else {
 		document.body.className = "canvas";
-		e.target.innerHTML = "Convert to image";
+		e.target.innerHTML = "To image";
 		im = false;
 	}
 	
