@@ -16,9 +16,10 @@ ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
 var nwHandle = document.getElementById("nwHandle");
 var seHandle = document.getElementById("seHandle");
 var dragHandle = document.getElementById("dragHandle");
+var saveBtn = document.getElementById("save");
+var newBtn = document.getElementById("new");
 		
 var init = function() {
-	//container.style.top = "100px";
 	container.style.left = (window.innerWidth-container.offsetWidth)/2 + "px";
 	nwHandle.style.top = (container.offsetTop-nwHandle.offsetHeight) + "px";
 	nwHandle.style.left = (container.offsetLeft-nwHandle.offsetWidth) + "px";
@@ -37,7 +38,7 @@ window.addEventListener("load", function() { window. scrollTo(0, 0); });
 window.addEventListener('resize', init, false);
 
 //drawService
-var drawService = new DrawService(container,ctx);
+var drawService = new DrawService(container,ctx,saveBtn,newBtn);
 //resizeService
 var resizeService = new ResizeService(container,ctx,nwHandle,seHandle,dragHandle);
 resizeService.setLineWidth(ctx.lineWidth);
@@ -90,7 +91,7 @@ var setFileSelect = function(e) {
 
 //document.getElementById("fileSelect").addEventListener('change', setFileSelect, {capture: false});
 //save
-var saveBtn = document.getElementById("save");
+//var saveBtn = document.getElementById("save");
 //saveBtn.addEventListener('click', function() {
 	//var img = canvas.toDataURL().replace(/^data:image\/\w+;base64,/, "");
 	//var data = { data: img };
@@ -151,24 +152,21 @@ saveBtn.addEventListener('click', function(e) {
 		im = false;
 	}
 	
-	
-	
-	
 }, false)
 
 
 
 //new
-var newBtn = document.getElementById("new");
 newBtn.addEventListener('click', function() {
+	saveBtn.disabled = true;
+	newBtn.disabled = true;
 	document.body.className = "canvas";
-	saveBtn.innerHTML = "Convert to image";
+	saveBtn.innerHTML = "To image";
 	ctx.canvas.width = container.offsetWidth;
 	ctx.canvas.height = container.offsetHeight;
 	ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
 	ctx.lineJoin = ctx.lineCap = 'round';
 	ctx.fillStyle="#ffffff";
 	ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
-	
 }, false)
 		

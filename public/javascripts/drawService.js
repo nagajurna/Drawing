@@ -1,8 +1,12 @@
-function DrawService(container,ctx) {
+function DrawService(container,ctx,saveBtn,newBtn) {
 	
 	var container = container;
 	
 	var canvas = ctx.canvas;
+	
+	var saveBtn = saveBtn;
+	
+	var newBtn = newBtn;
 	
 	var drawing = false;
 	
@@ -12,11 +16,13 @@ function DrawService(container,ctx) {
 	
 	canvas.addEventListener('mouseout', function() {
 		drawing = false;
-		}, false)
+		}, false);
 	
 	this.mousedown = function(e) {
 		e.preventDefault();
 		if(e.which===1) {
+			saveBtn.disabled = false;
+			newBtn.disabled = false;
 			drawing = true;
 			lastPoint={ x: e.clientX-container.offsetLeft, y: e.clientY-container.offsetTop };
 			ctx.beginPath();
@@ -45,6 +51,8 @@ function DrawService(container,ctx) {
 	};
 	
 	this.touchstart = function(e) {
+		saveBtn.disabled = false;
+		newBtn.disabled = false;
 		var touch = e.touches[0];
 		drawing = true;
 		lastPoint={ x: touch.clientX-container.offsetLeft, y: touch.clientY-container.offsetTop };

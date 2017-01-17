@@ -134,6 +134,7 @@ body.image #seHandle, body.image #nwHandle {
 	position: absolute;
 	right: 10px;
 */
+	font-size: 14px;
 	width: auto;
 	height: 28px;
 	padding: 3px;
@@ -142,9 +143,13 @@ body.image #seHandle, body.image #nwHandle {
 	box-sizing: border-box;
 }
 
+.control[disabled] {
+	color: #757575;
+}
+
 
 #save {
-	width: 88px
+	width: 92px
 }
 
 #new {
