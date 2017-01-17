@@ -4,8 +4,13 @@
   "description": "Simple app for simple drawing",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "drawing",
+    "canvas"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/nagajurna/Drawing"
@@ -14,6 +19,10 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "serve-favicon": "^2.3.2"
+  },
+  "engines": {
+    "node": "6.4.0"
   }
 }

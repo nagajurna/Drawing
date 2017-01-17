@@ -1,10 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var favicon = require('serve-favicon');
 var app = express();
 
 var fs = require('fs');
 
 app.use(express.static('public'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 
