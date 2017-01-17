@@ -19,6 +19,9 @@ var dragHandle = document.getElementById("dragHandle");
 var convertBtn = document.getElementById("convert");
 var saveBtn = document.getElementById("save");
 var newBtn = document.getElementById("new");
+convertBtn.disabled = true;
+saveBtn.disabled = true;
+newBtn.disabled = true;
 		
 var init = function() {
 	container.style.left = (window.innerWidth-container.offsetWidth)/2 + "px";
@@ -32,9 +35,8 @@ var init = function() {
 
 //load
 document.onload = init();
-//init();
-
 window.addEventListener("load", function() { window. scrollTo(0, 0); });
+
 //resize
 window.addEventListener('resize', init, false);
 
@@ -45,7 +47,6 @@ var resizeService = new ResizeService(container,ctx,nwHandle,seHandle,dragHandle
 resizeService.setLineWidth(ctx.lineWidth);
 //dragAndDropService
 var dragAndDropService = new DragAndDropService(container,nwHandle,seHandle,dragHandle);
-
 
 //change line width
 var setLineWidth = function(e) {
@@ -117,7 +118,7 @@ var setFileSelect = function(e) {
 	
 //}, false)
 
-
+//save
 saveBtn.addEventListener('click', function() {
 		var data = canvas.toDataURL().replace(/^data:image\/\w+;base64,/, "");
 		var dataInput = document.createElement("input");
@@ -136,7 +137,7 @@ saveBtn.addEventListener('click', function() {
 	  
 }, false)
 
-
+//convert
 var im = false;
 convertBtn.addEventListener('click', function(e) {
 	if(im===false) {	
