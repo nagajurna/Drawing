@@ -61,8 +61,9 @@ app.post('/save2', function (req, res) {
 	
 });
 	
+var port = process.env.PORT || '3000';
+app.set('port', port);
 
-
-app.listen(3000, function () {
-  console.log('drawing listening on port 3000!');
+app.listen(port, function () {
+  console.log('drawing listening on port ' + port);
 });
