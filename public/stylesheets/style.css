@@ -1,0 +1,171 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+	box-sizing: border-box;
+	overflow: hidden;
+	background-color: #f1f1f1;
+}
+
+html:hover {
+	cursor: default;
+}
+
+body {
+	position: relative;
+	
+}
+
+nav {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	min-height: 50px;
+	background-color: #333;
+}
+
+#container {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: -webkit-calc(100% - 50px);
+	height: -moz-calc(100% - 50px);
+	height: calc(100% - 50px);
+	overflow: hidden;
+	background-color: #fff;
+	box-shadow: 8px 8px 10px -5px #aaa;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+	#container {
+		top: 50px;
+		width: 75%;
+		height: 85%;
+		max-height: -webkit-calc(100% - 150px);
+		max-height: -moz-calc(100% - 150px);
+		max-height: calc(100% - 150px);
+	}
+}
+
+#canvas {
+	position: absolute;
+	display: block;
+}
+
+body.image #canvas {
+	display: none;
+}
+
+#image {
+	display: none;
+}
+
+#image:hover {
+	cursor: default;
+}
+
+body.image #image {
+	display: block;
+}
+
+#canvas:hover {
+	cursor: pointer;
+}
+
+#dragHandle {
+	position: absolute;
+	height: 20px;
+	width:40px;
+	border-top: 2px solid #e0e0e0;
+}
+
+#dragHandle:hover {
+	cursor: grab;
+	cursor: -webkit-grab;
+}
+
+#bar {
+	position: absolute;
+	left: 19px;
+	height: 100%;
+	width: 0px;
+	border-left: 2px solid #e0e0e0;
+
+}
+
+body.canvas #nwHandle {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-bottom: 2px solid #e0e0e0;
+	border-right: 2px solid #e0e0e0;
+	
+}
+
+body.canvas #seHandle {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-top: 2px solid #e0e0e0;
+	border-left: 2px solid #e0e0e0;
+}
+
+#seHandle:hover, #nwHandle:hover {
+	cursor: nwse-resize;
+}
+
+body.image #seHandle, body.image #nwHandle {
+	display: none;
+}
+
+.controls {
+/*
+	position: absolute;
+	right: 10px;
+*/
+	width: auto;
+	height: auto;
+	padding: 2px;
+}
+
+
+#save {
+/*
+	top: 50px
+*/
+}
+
+#new {
+/*
+	top: 10px;
+*/
+}
+
+#lineWidthSelect {
+/*
+	top: 90px;
+	position: absolute;
+	right: 10px;
+*/
+	width: auto;
+	height: auto;
+	padding: 2px;
+}
+
+#strokeStyleSelect {
+/*
+	top: 130px;
+	position: absolute;
+	right: 10px;
+*/
+	width: auto;
+	height: auto;
+	padding: 2px;
+}
+

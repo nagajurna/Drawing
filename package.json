@@ -1,0 +1,19 @@
+{
+  "name": "drawing",
+  "version": "1.0.0",
+  "description": "Simple app for simple drawing",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nagajurna/Drawing"
+  },
+  "author": "nagajurna",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  }
+}

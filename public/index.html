@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Drawing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="stylesheets/style.css" />
+  <link rel="stylesheet" href="stylesheets/normalize.css" />
+</head>
+<body class="canvas">
+	
+	<div id="container">
+		<canvas id="canvas" ></canvas>
+		<img src="" id="image" />
+	</div>
+	<div id="dragHandle">
+		<div id="bar"></div>
+	</div>
+	<div id="nwHandle"></div>
+	<div id="seHandle"></div>
+	
+<!--
+	<input id="fileSelect" type="file">
+-->
+	<nav>
+		<button type="button" id="save" class="controls">Convert to image</button>
+		
+		<button type="button" id="new" class="controls">New drawing</button>
+	
+		<select id="strokeStyleSelect">
+		  <option value="#000" selected> Black</option>
+		  <option value="#fff"> White</option>
+		</select>
+		
+		<select id="lineWidthSelect" >
+		  <option value="1"> 1 px</option>
+		  <option value="2" selected> 2 px</option>
+		  <option value="3"> 3 px</option>
+		  <option value="4"> 4 px</option>  
+		  <option value="5"> 5 px</option>
+		  <option value="6"> 6 px</option>
+		  <option value="7"> 7 px</option>
+		  <option value="8"> 8 px</option>
+		  <option value="9"> 9 px</option>
+		  <option value="10"> 10 px</option>
+		  <option value="11"> 11 px</option>
+		  <option value="12"> 12 px</option>
+		  <option value="13"> 13 px</option>
+		</select>
+	</nav>
+	<script src="javascripts/resizeService.js"></script>
+	<script src="javascripts/dragAndDropService.js"></script>
+	<script src="javascripts/drawService.js"></script>
+	<script src="javascripts/drawing.js"></script>
+</body>
+</html>

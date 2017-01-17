@@ -1,0 +1,39 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+.controls {
+	position: absolute;
+	right: 10px;
+	width: 55px;
+	height: 25px;
+}
+
+
+#save {
+	top: 45px
+}
+
+#new {
+	top: 10px;
+}
+
+.pixelated {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+}
