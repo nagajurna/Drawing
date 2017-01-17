@@ -16,6 +16,7 @@ ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
 var nwHandle = document.getElementById("nwHandle");
 var seHandle = document.getElementById("seHandle");
 var dragHandle = document.getElementById("dragHandle");
+var convertBtn = document.getElementById("convert");
 var saveBtn = document.getElementById("save");
 var newBtn = document.getElementById("new");
 		
@@ -38,7 +39,7 @@ window.addEventListener("load", function() { window. scrollTo(0, 0); });
 window.addEventListener('resize', init, false);
 
 //drawService
-var drawService = new DrawService(container,ctx,saveBtn,newBtn);
+var drawService = new DrawService(container,ctx,convertBtn,saveBtn,newBtn);
 //resizeService
 var resizeService = new ResizeService(container,ctx,nwHandle,seHandle,dragHandle);
 resizeService.setLineWidth(ctx.lineWidth);
@@ -117,29 +118,27 @@ var setFileSelect = function(e) {
 //}, false)
 
 
-//saveBtn.addEventListener('click', function() {
-		//var data = canvas.toDataURL().replace(/^data:image\/\w+;base64,/, "");
-		//var dataInput = document.createElement("input");
-		//dataInput.setAttribute("name", 'data');
-		//dataInput.setAttribute("value", data);
-		//dataInput.setAttribute("type", "hidden");
+saveBtn.addEventListener('click', function() {
+		var data = canvas.toDataURL().replace(/^data:image\/\w+;base64,/, "");
+		var dataInput = document.createElement("input");
+		dataInput.setAttribute("name", 'data');
+		dataInput.setAttribute("value", data);
+		dataInput.setAttribute("type", "hidden");
 		
-		//var myForm = document.createElement("form");
-		//myForm.method = 'post';
-		//myForm.action = '/save';
-		//myForm.appendChild(dataInput);
+		var myForm = document.createElement("form");
+		myForm.method = 'post';
+		myForm.action = '/save';
+		myForm.appendChild(dataInput);
 		
-		//document.body.appendChild(myForm);
-		//myForm.submit();
-		//document.body.removeChild(myForm);
+		document.body.appendChild(myForm);
+		myForm.submit();
+		document.body.removeChild(myForm);
 	  
-	
-	
-	
-	
-//}, false)
+}, false)
+
+
 var im = false;
-saveBtn.addEventListener('click', function(e) {
+convertBtn.addEventListener('click', function(e) {
 	if(im===false) {	
 		image.src = ctx.canvas.toDataURL('image/png');
 		document.body.className = "image";
@@ -158,10 +157,11 @@ saveBtn.addEventListener('click', function(e) {
 
 //new
 newBtn.addEventListener('click', function() {
+	convertBtn.disabled = true;
 	saveBtn.disabled = true;
 	newBtn.disabled = true;
 	document.body.className = "canvas";
-	saveBtn.innerHTML = "To image";
+	convertBtn.innerHTML = "To image";
 	ctx.canvas.width = container.offsetWidth;
 	ctx.canvas.height = container.offsetHeight;
 	ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);

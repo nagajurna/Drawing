@@ -1,8 +1,10 @@
-function DrawService(container,ctx,saveBtn,newBtn) {
+function DrawService(container,ctx,convertBtn,saveBtn,newBtn) {
 	
 	var container = container;
 	
 	var canvas = ctx.canvas;
+	
+	var convertBtn = convertBtn;
 	
 	var saveBtn = saveBtn;
 	
@@ -21,6 +23,7 @@ function DrawService(container,ctx,saveBtn,newBtn) {
 	this.mousedown = function(e) {
 		e.preventDefault();
 		if(e.which===1) {
+			convertBtn.disabled = false;
 			saveBtn.disabled = false;
 			newBtn.disabled = false;
 			drawing = true;
@@ -51,6 +54,7 @@ function DrawService(container,ctx,saveBtn,newBtn) {
 	};
 	
 	this.touchstart = function(e) {
+		convertBtn.disabled = false;
 		saveBtn.disabled = false;
 		newBtn.disabled = false;
 		var touch = e.touches[0];

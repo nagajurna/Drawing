@@ -130,14 +130,10 @@ body.image #seHandle, body.image #nwHandle {
 }
 
 .control {
-/*
-	position: absolute;
-	right: 10px;
-*/
 	font-size: 14px;
 	width: auto;
-	height: 28px;
-	padding: 3px;
+	height: 30px;
+	padding: 0px 3px;
 	margin-left: 1px;
 	margin-right: 1px;
 	box-sizing: border-box;
@@ -147,32 +143,27 @@ body.image #seHandle, body.image #nwHandle {
 	color: #757575;
 }
 
-
-#save {
+#convert {
+	display: inline-block;
 	width: 92px
 }
 
-#new {
-/*
-	top: 10px;
-*/
+
+@media only screen and (min-width: 768px) {
+	#convert {
+		display: none;
+	}
 }
 
-#lineWidthSelect {
-/*
-	top: 90px;
-	position: absolute;
-	right: 10px;
-*/
-	
+#save {
+	display: none;
+	width: auto;
 }
 
-#strokeStyleSelect {
-/*
-	top: 130px;
-	position: absolute;
-	right: 10px;
-*/
-	
+
+@media only screen and (min-width: 768px) {
+	#save {
+		display: inline-block;
+	}
 }
 

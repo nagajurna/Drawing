@@ -20,16 +20,16 @@ app.post('/save', function (req, res) {
 		if(err) {
 			return res.send(err);
 		} else {
-			res.send('temp/' + name + '.png');
-			//res.setHeader('Content-Type', 'image/png');
-			//res.setHeader('Content-disposition', 'attachment; filename=' + name + ".png");
-			//res.download('public/temp/' + name + '.png', null, function(err) {
-				//if(err) {
-					//return res.send(err);
-				//} else {
-					//fs.unlinkSync('public/temp/' + name + '.png')
-				//}
-			//});
+			//res.send('temp/' + name + '.png');
+			res.setHeader('Content-Type', 'image/png');
+			res.setHeader('Content-disposition', 'attachment; filename=' + name + ".png");
+			res.download('public/temp/' + name + '.png', null, function(err) {
+				if(err) {
+					return res.send(err);
+				} else {
+					fs.unlinkSync('public/temp/' + name + '.png')
+				}
+			});
 		}
 		
 	});
@@ -48,19 +48,7 @@ app.get('/download', function (req, res) {
 	});
 });
 
-app.post('/save2', function (req, res) {
-	
-	
-	fs.writeFile('public/temp/image.png', req.body.data, function(err) {
-		if(err) {
-			return res.send(err);
-		} else {
-			res.send('temp/' + name + '.png');
-		}
-	});
-	
-});
-	
+
 var port = process.env.PORT || '3000';
 app.set('port', port);
 
