@@ -102,7 +102,6 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle) {
 			ctx.canvas.style.cursor = "pointer";
 			document.body.style.cursor = "default";
 			//resize canvas and redraw
-			//var ctx = canvas.getContext('2d');
 			var data = ctx.canvas.toDataURL();
 			ctx.canvas.width = container.offsetWidth;
 			ctx.canvas.height = container.offsetHeight;
@@ -121,7 +120,6 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle) {
 			ctx.canvas.style.cursor = "pointer";
 			document.body.style.cursor = "default";
 			//resize canvas and redraw
-			//var ctx = canvas.getContext('2d');
 			var data = ctx.canvas.toDataURL();
 			ctx.canvas.width = container.offsetWidth;
 			ctx.canvas.height = container.offsetHeight;
@@ -155,7 +153,6 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle) {
 		var touch = e.touches[0];
 		if(seResize===true) {
 			e.preventDefault();
-			//touch.target.style.cursor = "nwse-resize";
 			//resize container
 			var h = container.offsetHeight - (container.offsetHeight + container.offsetTop - touch.clientY);
 			var w = container.offsetWidth -(container.offsetWidth + container.offsetLeft - touch.clientX);
@@ -171,7 +168,6 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle) {
 			
 		} else if(nwResize===true) {
 			e.preventDefault();
-			//touch.target.style.cursor = "nwse-resize";
 			var lm = container.offsetLeft - (container.offsetLeft - touch.clientX);
 			var tm = container.offsetTop - (container.offsetTop - touch.clientY);
 			var w = container.offsetWidth + (container.offsetLeft - lm);
@@ -196,14 +192,9 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle) {
 	};
 	
 	this.touchend = function(e) {
-		//var touch = e.touches[0];
-		//touch.preventDefault();
 		if(seResize===true) {
 			seResize = false;
-			//ctx.canvas.style.cursor = "pointer";
-			//document.body.style.cursor = "default";
 			//resize canvas and redraw
-			//var ctx = canvas.getContext('2d');
 			var data = ctx.canvas.toDataURL();
 			ctx.canvas.width = container.offsetWidth;
 			ctx.canvas.height = container.offsetHeight;
@@ -219,10 +210,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle) {
 			img.src = data;
 		} else if(nwResize===true) {
 			nwResize = false;
-			//ctx.canvas.style.cursor = "pointer";
-			//document.body.style.cursor = "default";
 			//resize canvas and redraw
-			//var ctx = canvas.getContext('2d');
 			var data = ctx.canvas.toDataURL();
 			ctx.canvas.width = container.offsetWidth;
 			ctx.canvas.height = container.offsetHeight;

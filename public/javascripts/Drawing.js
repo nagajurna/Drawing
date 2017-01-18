@@ -28,6 +28,7 @@ function Drawing() {
 	//dragAndDropService
 	var dragAndDropService = new DragAndDropService(container,nwHandle,seHandle,dragHandle);
 	
+	//load
 	this.init = function() {
 		//canvas
 		ctx.canvas.width = container.offsetWidth;
@@ -35,6 +36,7 @@ function Drawing() {
 		ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
 		resizeService.setLineWidth(ctx.lineWidth);
 		ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
+		resizeService.setStrokeStyle(ctx.strokeStyle);
 		ctx.lineJoin = ctx.lineCap = 'round';
 		ctx.fillStyle="#ffffff";
 		ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
@@ -51,13 +53,16 @@ function Drawing() {
 		convertBtn.disabled = true;
 		saveBtn.disabled = true;
 		newBtn.disabled = true;
+		//attach events
+		lineWidthSelect.addEventListener('change', this.setLineWidth, {capture: false});
+		strokeStyleSelect.addEventListener('change', this.setStrokeStyle, {capture: false});
+		saveBtn.addEventListener('click', this.save, false);
+		convertBtn.addEventListener('click', this.convert, false);
+		newBtn.addEventListener('click', this.newPage, false);
 	};
 
-	//load
-	document.onload = this.init();
-
 	//resize
-	this.resize = function() {
+	this.position = function() {
 		container.style.left = (window.innerWidth-container.offsetWidth)/2 + "px";
 		nwHandle.style.top = (container.offsetTop-nwHandle.offsetHeight) + "px";
 		nwHandle.style.left = (container.offsetLeft-nwHandle.offsetWidth) + "px";
@@ -66,27 +71,18 @@ function Drawing() {
 		dragHandle.style.top = (container.offsetTop-dragHandle.offsetHeight) + "px";
 		dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
 	};
-	window.addEventListener('resize', this.resize, false);
-
-	//others
-	window.addEventListener("load", function() { window. scrollTo(0, 0); });
-	document.addEventListener("touchmove", function(e) { e.preventDefault() }, {passive: false});
-
+	
 	//change line width
 	this.setLineWidth = function(e) {
 		ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
 		resizeService.setLineWidth(ctx.lineWidth);
 	};
 
-	lineWidthSelect.addEventListener('change', this.setLineWidth, {capture: false});
-
 	//change line width
 	this.setStrokeStyle = function(e) {
 		ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
 		resizeService.setStrokeStyle(ctx.strokeStyle);
 	};
-
-	strokeStyleSelect.addEventListener('change', this.setStrokeStyle, {capture: false});
 
 	this.setFileSelect = function(e) {
 		if(e.target.files[0].size > 2000000) {
@@ -160,8 +156,6 @@ function Drawing() {
 		document.body.removeChild(myForm);
 	}
 
-	saveBtn.addEventListener('click', this.save, false)
-
 	//convert
 	this.convert = function(e) {
 		if(im===false) {	
@@ -175,8 +169,6 @@ function Drawing() {
 			im = false;
 		}
 	}
-
-	convertBtn.addEventListener('click', this.convert, false)
 
 	//new
 	this.newPage = function() {
@@ -203,8 +195,5 @@ function Drawing() {
 		ctx.fillStyle="#ffffff";
 		ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
 	}
-
-
-	newBtn.addEventListener('click', this.newPage, false)
 		
 }
