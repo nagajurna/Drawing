@@ -36,8 +36,7 @@ var init = function() {
 //load
 document.onload = init();
 window.addEventListener("load", function() { window. scrollTo(0, 0); });
-window.addEventListener("mousemove", function(e) { e.preventDefault() }, {passive: false});
-window.addEventListener("touchmove", function(e) { e.preventDefault() }, {passive: false});
+document.addEventListener("touchmove", function(e) { e.preventDefault() }, {passive: false});
 
 //resize
 window.addEventListener('resize', init, false);

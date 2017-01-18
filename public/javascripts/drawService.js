@@ -75,7 +75,7 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn) {
 		}
 	};
 
-	this.touchend = function() {
+	this.touchend = function(e) {
 		drawing = false;
 	};
 	
