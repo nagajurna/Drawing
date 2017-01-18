@@ -63,6 +63,7 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn) {
 	};
 
 	this.touchmove = function(e) {
+		e.preventDefault();
 		var touch = e.touches[0];
 		if (drawing) {
 			var currentPoint={ x: touch.clientX-container.offsetLeft, y: touch.clientY-container.offsetTop };
@@ -82,7 +83,7 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn) {
 	canvas.addEventListener("mousemove",this.mousemove, {capture: false});
 	canvas.addEventListener("mouseup",this.mouseup, {capture: false});
 	canvas.addEventListener("touchstart",this.touchstart, {capture: false, passive: true});
-	canvas.addEventListener("touchmove",this.touchmove, {capture: false, passive: true});
+	canvas.addEventListener("touchmove",this.touchmove, {capture: false, passive: false});
 	canvas.addEventListener("touchend",this.touchend, {capture: false, passive: true});
 	
 }

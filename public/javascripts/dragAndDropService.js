@@ -39,9 +39,42 @@ function DragAndDropService(container,nwHandle,seHandle,dragHandle) {
 		datas = {};
 	};
 	
+	this.touchstart = function(e) {
+		var touch = e.touches[0];
+		//touch.preventDefault();
+		//touch.target.style.cursor = "move";
+		datas.xDif = touch.screenX - container.offsetLeft;
+		datas.yDif = touch.screenY - container.offsetTop;
+	};
+	
+	this.touchmove = function(e) {
+		var touch = e.touches[0];
+		e.preventDefault();
+		if(datas.xDif) {
+			container.style.left = touch.screenX - datas.xDif + "px";
+			container.style.top = touch.screenY - datas.yDif + "px";
+			
+			nwHandle.style.top = (container.offsetTop-20) + "px";
+			nwHandle.style.left = (container.offsetLeft-20) + "px";
+			seHandle.style.top = (container.offsetTop+container.offsetHeight) + "px";
+			seHandle.style.left = (container.offsetLeft+container.offsetWidth) + "px";
+			dragHandle.style.top = (container.offsetTop-dragHandle.offsetHeight) + "px";
+			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
+		}
+	};
+	
+	this.touchend = function(e) {
+		//var touch = e.touches[0];
+		//touch.preventDefault();
+		datas = {};
+	};
+	
 	dragHandle.addEventListener('mousedown', this.mousedown, {capture: false});
 	document.addEventListener('mousemove', this.mousemove, {capture: false});
 	dragHandle.addEventListener('mouseup', this.mouseup, {capture: false});
+	dragHandle.addEventListener('touchstart', this.touchstart, {capture: false});
+	document.addEventListener('touchmove', this.touchmove, {capture: false, passive: false});
+	dragHandle.addEventListener('touchend', this.touchend, {capture: false});
 	
 
 	
