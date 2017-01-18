@@ -166,6 +166,17 @@ newBtn.addEventListener('click', function() {
 	ctx.canvas.width = container.offsetWidth;
 	ctx.canvas.height = container.offsetHeight;
 	ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
+	resizeService.setLineWidth(ctx.lineWidth);
+	var options = document.getElementById("strokeStyleSelect").getElementsByTagName("option");
+	for(var i=0; i<options.length; i++) {
+		if(options[i].value==='#000') {
+			options[i].selected = true;
+		} else {
+			options[i].selected = false;
+		}
+	}
+	ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
+	resizeService.setStrokeStyle(ctx.strokeStyle);
 	ctx.lineJoin = ctx.lineCap = 'round';
 	ctx.fillStyle="#ffffff";
 	ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
