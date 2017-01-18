@@ -74,13 +74,13 @@ function Drawing() {
 	
 	//change line width
 	this.setLineWidth = function(e) {
-		ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
+		ctx.lineWidth = parseInt(lineWidthSelect.value);
 		resizeService.setLineWidth(ctx.lineWidth);
 	};
 
 	//change line width
 	this.setStrokeStyle = function(e) {
-		ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
+		ctx.strokeStyle = strokeStyleSelect.value;
 		resizeService.setStrokeStyle(ctx.strokeStyle);
 	};
 
@@ -140,6 +140,7 @@ function Drawing() {
 
 	//save
 	this.save = function() {
+		im = false;
 		var data = canvas.toDataURL().replace(/^data:image\/\w+;base64,/, "");
 		var dataInput = document.createElement("input");
 		dataInput.setAttribute("name", 'data');
@@ -154,27 +155,43 @@ function Drawing() {
 		document.body.appendChild(myForm);
 		myForm.submit();
 		document.body.removeChild(myForm);
-	}
-
+	};
+	
 	//convert
 	this.convert = function(e) {
-		if(im===false) {	
+		if(im===false) {
+			im = true;	
 			image.src = ctx.canvas.toDataURL('image/png');
+			lineWidthSelect.disabled = true;
+			strokeStyleSelect.disabled = true;
 			document.body.className = "image";
 			e.target.innerHTML = "To drawing";
-			im = true;
+			//this.flash(document.getElementById("flash"));
 		} else {
+			im = false;
+			lineWidthSelect.disabled = false;
+			strokeStyleSelect.disabled = false;
 			document.body.className = "canvas";
 			e.target.innerHTML = "To image";
-			im = false;
 		}
-	}
+	}.bind(this);
+	
+	this.flash = function(el) {
+		el.style.display = "block";
+		el.style.left = (container.offsetWidth-el.offsetWidth)/2 + "px";
+		window.setTimeout(function() {
+			el.style.display = "none";
+			},1200)
+	};
 
 	//new
 	this.newPage = function() {
+		im = false;
 		convertBtn.disabled = true;
 		saveBtn.disabled = true;
 		newBtn.disabled = true;
+		lineWidthSelect.disabled = false;
+		strokeStyleSelect.disabled = false;
 		document.body.className = "canvas";
 		convertBtn.innerHTML = "To image";
 		ctx.canvas.width = container.offsetWidth;
