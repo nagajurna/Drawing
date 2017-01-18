@@ -244,12 +244,12 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle) {
 	
 	seHandle.addEventListener('mousedown', this.mousedown, {capture: false});
 	nwHandle.addEventListener('mousedown', this.mousedown, {capture: false});
-	window.addEventListener('mousemove', this.mousemove, {capture: false});
-	window.addEventListener('mouseup', this.mouseup, {capture: false});
+	document.addEventListener('mousemove', this.mousemove, {capture: false});
+	document.addEventListener('mouseup', this.mouseup, {capture: false});
 	seHandle.addEventListener('touchstart', this.touchstart, {capture: false});
 	nwHandle.addEventListener('touchstart', this.touchstart, {capture: false});
-	window.addEventListener('touchmove', this.touchmove, {capture: false, passive: false});
-	window.addEventListener('touchend', this.touchend, {capture: false});
+	document.addEventListener('touchmove', this.touchmove, {capture: false, passive: false});
+	document.addEventListener('touchend', this.touchend, {capture: false});
 
 	
 };
