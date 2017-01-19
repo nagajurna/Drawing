@@ -166,7 +166,7 @@ function Drawing() {
 			strokeStyleSelect.disabled = true;
 			document.body.className = "image";
 			e.target.innerHTML = "To drawing";
-			//this.flash(document.getElementById("flash"));
+			this.flash(document.getElementById("flash"));
 		} else {
 			im = false;
 			lineWidthSelect.disabled = false;
