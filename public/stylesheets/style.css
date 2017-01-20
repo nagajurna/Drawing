@@ -10,13 +10,9 @@ html, body {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-html:hover {
-	cursor: default;
-}
-
 body {
 	position: relative;
-	
+	cursor: default;
 }
 
 nav {
@@ -24,7 +20,7 @@ nav {
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
-	min-height: 50px;
+	height: 50px;
 	background-color: #333;
 	text-align: center;
 }
@@ -43,7 +39,6 @@ nav {
 	height: calc(100% - 50px);
 	overflow: hidden;
 	background-color: #fff;
-	box-shadow: 8px 8px 10px -5px #aaa;
 }
 
 
@@ -56,12 +51,17 @@ nav {
 		max-height: -webkit-calc(100% - 150px);
 		max-height: -moz-calc(100% - 150px);
 		max-height: calc(100% - 150px);
+		box-shadow: 8px 8px 10px -5px #aaa;
 	}
 }
 
 #canvas {
 	position: absolute;
 	display: block;
+}
+
+#canvas:hover {
+	cursor: pointer;
 }
 
 body.image #canvas {
@@ -78,10 +78,6 @@ body.image #canvas {
 
 body.image #image {
 	display: block;
-}
-
-#canvas:hover {
-	cursor: pointer;
 }
 
 #dragHandle {
@@ -148,7 +144,6 @@ body.image #seHandle, body.image #nwHandle {
 	width: 92px
 }
 
-
 @media only screen and (min-width: 768px) {
 	#convert {
 		display: none;
@@ -159,7 +154,6 @@ body.image #seHandle, body.image #nwHandle {
 	display: none;
 	width: auto;
 }
-
 
 @media only screen and (min-width: 768px) {
 	#save {
@@ -175,8 +169,5 @@ body.image #seHandle, body.image #nwHandle {
 	padding: 5px;
 	background-color: #333;
 	color: #fff;
-/*
-	box-shadow: 8px 8px 10px -5px #aaa;
-*/
 }
 

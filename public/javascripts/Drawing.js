@@ -166,7 +166,7 @@ function Drawing() {
 			strokeStyleSelect.disabled = true;
 			document.body.className = "image";
 			e.target.innerHTML = "To drawing";
-			this.flash(document.getElementById("flash"));
+			this.flash(document.getElementById("flash"), 'Long touch to save');
 		} else {
 			im = false;
 			lineWidthSelect.disabled = false;
@@ -176,7 +176,8 @@ function Drawing() {
 		}
 	}.bind(this);
 	
-	this.flash = function(el) {
+	this.flash = function(el,message) {
+		el.innerHTML = message;
 		el.style.display = "block";
 		el.style.left = (container.offsetWidth-el.offsetWidth)/2 + "px";
 		window.setTimeout(function() {
