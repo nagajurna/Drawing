@@ -17,11 +17,13 @@ function Drawing() {
 	//selects
 	const lineWidthSelect = document.getElementById("lineWidthSelect");
 	const strokeStyleSelect = document.getElementById("strokeStyleSelect");
+	//size
+	const size = document.getElementById("size");
 	//mode image = false (=> mode canvas=true)
 	let im = false;
 	//Services
 	let drawService = DrawService(container,ctx,convertBtn,saveBtn,newBtn);
-	let resizeService = ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect);
+	let resizeService = ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect,size);
 	let dragAndDropService = DragAndDropService(container,nwHandle,seHandle,dragHandle);
 	
 	//load
@@ -47,6 +49,8 @@ function Drawing() {
 		convertBtn.disabled = true;
 		saveBtn.disabled = true;
 		newBtn.disabled = true;
+		//size
+		size.innerHTML = ctx.canvas.width + "px X " + ctx.canvas.height + "px";
 	};
 	
 	document.addEventListener('DOMContentLoaded',init, false);

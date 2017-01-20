@@ -1,4 +1,4 @@
-function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect) {
+function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect,size) {
 
 	let seResize = false;
 	
@@ -30,6 +30,8 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			seHandle.style.left = container.offsetLeft + container.offsetWidth + "px";
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
+			//size
+			size.innerHTML = w + "px X " + h + "px";
 			
 		} else if(nwResize===true) {
 			e.preventDefault();
@@ -54,6 +56,8 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			seHandle.style.left = container.offsetLeft + container.offsetWidth + "px";
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
+			//size
+			size.innerHTML = w + "px X " + h + "px";
 		}
 	};
 	
