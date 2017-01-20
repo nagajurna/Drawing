@@ -100,7 +100,6 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 		}
 	};
 	
-	
 	const touchstart = (e) => {
 		let touch = e.touches[0];
 		if(touch.target.id==='seHandle') {
@@ -200,6 +199,4 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 	nwHandle.addEventListener('touchstart', touchstart, {capture: false});
 	document.addEventListener('touchmove', touchmove, {capture: false, passive: false});
 	document.addEventListener('touchend', touchend, {capture: false});
-
-	
 };

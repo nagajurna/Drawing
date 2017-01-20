@@ -7,7 +7,6 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn) {
 	let lastPoint = {};
 	
 	let currentPoint = {};
-	
 		
 	const mousedown = (e) => {
 		e.preventDefault();
@@ -66,7 +65,6 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn) {
 		drawing = false;
 	};
 	
-	
 	canvas.addEventListener('mouseout', () => { drawing = false; }, false);
 	canvas.addEventListener("mousedown",mousedown, {capture: false});
 	canvas.addEventListener("mousemove",mousemove, {capture: false});
@@ -74,5 +72,4 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn) {
 	canvas.addEventListener("touchstart",touchstart, {capture: false, passive: true});
 	canvas.addEventListener("touchmove",touchmove, {capture: false, passive: false});
 	canvas.addEventListener("touchend",touchend, {capture: false, passive: true});
-	
-}
+};

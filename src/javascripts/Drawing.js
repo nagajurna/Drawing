@@ -20,11 +20,8 @@ function Drawing() {
 	//mode image = false (=> mode canvas=true)
 	let im = false;
 	//Services
-	//drawService
 	let drawService = DrawService(container,ctx,convertBtn,saveBtn,newBtn);
-	//resizeService
 	let resizeService = ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect);
-	//dragAndDropService
 	let dragAndDropService = DragAndDropService(container,nwHandle,seHandle,dragHandle);
 	
 	//load
@@ -52,7 +49,7 @@ function Drawing() {
 		newBtn.disabled = true;
 	};
 	
-	document.onload = init();
+	document.addEventListener('DOMContentLoaded',init, false);
 
 	//resize
 	const position = () => {
@@ -78,7 +75,6 @@ function Drawing() {
 	
 	document.addEventListener("touchmove", function(e) { e.preventDefault() }, {passive: false});
 
-	
 	//change line width
 	const setLineWidth = () => {
 		ctx.lineWidth = parseInt(lineWidthSelect.value);
@@ -170,5 +166,4 @@ function Drawing() {
 	};
 	
 	newBtn.addEventListener('click', newPage, false);
-		
 }
