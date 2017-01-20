@@ -81,6 +81,7 @@ body.image #image {
 }
 
 #dragHandle {
+	display: none;
 	position: absolute;
 	height: 20px;
 	width:40px;
@@ -101,7 +102,8 @@ body.image #image {
 
 }
 
-body.canvas #nwHandle {
+#nwHandle {
+	display: none;
 	position: absolute;
 	width: 20px;
 	height: 20px;
@@ -109,7 +111,8 @@ body.canvas #nwHandle {
 	border-right: 2px solid #d5d5d5;
 }
 
-body.canvas #seHandle {
+#seHandle {
+	display: none;
 	position: absolute;
 	width: 20px;
 	height: 20px;
@@ -121,8 +124,10 @@ body.canvas #seHandle {
 	cursor: nwse-resize;
 }
 
-body.image #seHandle, body.image #nwHandle {
-	display: none;
+@media only screen and (min-width: 768px) {
+	#dragHandle, #nwHandle, #seHandle {
+		display: block;
+	}
 }
 
 .control {
