@@ -73,14 +73,14 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			ctx.canvas.height = container.offsetHeight;
 			ctx.fillStyle="#ffffff";
 			ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
-			ctx.lineWidth = lineWidthSelect.value;
-			ctx.strokeStyle = strokeStyleSelect.value;
-			ctx.lineJoin = ctx.lineCap = 'round';
 			var img = new Image();
 			img.onload = function() {
 				ctx.drawImage(img,0,0, ctx.canvas.width, ctx.canvas.height,0,0,ctx.canvas.width,ctx.canvas.height);
 			}
 			img.src = data;
+			ctx.lineWidth = lineWidthSelect.value;
+			ctx.strokeStyle = strokeStyleSelect.value;
+			ctx.lineJoin = ctx.lineCap = 'round';
 		} else if(nwResize===true) {
 			nwResize = false;
 			ctx.canvas.style.cursor = "pointer";
@@ -93,14 +93,14 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			ctx.canvas.style.top = "0px";
 			ctx.fillStyle="#ffffff";
 			ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
-			ctx.lineWidth = lineWidthSelect.value;
-			ctx.strokeStyle = strokeStyleSelect.value;
-			ctx.lineJoin = ctx.lineCap = 'round';
 			let img = new Image();
 			img.onload = function() {
 				ctx.drawImage(img,img.width-ctx.canvas.width,img.height-ctx.canvas.height, ctx.canvas.width, ctx.canvas.height,0,0,ctx.canvas.width,ctx.canvas.height);
 			}
 			img.src = data;
+			ctx.lineWidth = lineWidthSelect.value;
+			ctx.strokeStyle = strokeStyleSelect.value;
+			ctx.lineJoin = ctx.lineCap = 'round';
 		}
 	};
 	

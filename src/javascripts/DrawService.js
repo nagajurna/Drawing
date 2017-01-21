@@ -1,6 +1,8 @@
 function DrawService(container,ctx,convertBtn,saveBtn,newBtn) {
 	
-	let canvas = ctx.canvas;
+	let c = container, context = ctx, cBtn = convertBtn, sBtn = saveBtn, nBtn = newBtn;
+	
+	let canvas = context.canvas;
 	
 	let drawing = false;
 	
@@ -11,26 +13,26 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn) {
 	const mousedown = (e) => {
 		e.preventDefault();
 		if(e.which===1) {
-			convertBtn.disabled = false;
-			saveBtn.disabled = false;
-			newBtn.disabled = false;
+			cBtn.disabled = false;
+			sBtn.disabled = false;
+			nBtn.disabled = false;
 			drawing = true;
-			lastPoint={ x: e.clientX-container.offsetLeft, y: e.clientY-container.offsetTop };
-			ctx.beginPath();
-			ctx.moveTo(lastPoint.x, lastPoint.y);
-			ctx.lineTo(lastPoint.x, lastPoint.y);
-			ctx.stroke();
+			lastPoint={ x: e.clientX-c.offsetLeft, y: e.clientY-c.offsetTop };
+			context.beginPath();
+			context.moveTo(lastPoint.x, lastPoint.y);
+			context.lineTo(lastPoint.x, lastPoint.y);
+			context.stroke();
 		}
 	};
 	
 	const mousemove = (e) => {
 		e.preventDefault();
 		if (drawing===true) {
-			currentPoint={ x: e.clientX-container.offsetLeft, y: e.clientY-container.offsetTop };
-			ctx.beginPath();
-			ctx.moveTo(lastPoint.x, lastPoint.y);
-			ctx.lineTo(currentPoint.x, currentPoint.y);
-			ctx.stroke();
+			currentPoint={ x: e.clientX-c.offsetLeft, y: e.clientY-c.offsetTop };
+			context.beginPath();
+			context.moveTo(lastPoint.x, lastPoint.y);
+			context.lineTo(currentPoint.x, currentPoint.y);
+			context.stroke();
 			lastPoint = currentPoint;
 		}
 	};
@@ -40,23 +42,23 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn) {
 	};
 	
 	const touchstart = (e) => {
-		convertBtn.disabled = false;
-		saveBtn.disabled = false;
-		newBtn.disabled = false;
+		cBtn.disabled = false;
+		sBtn.disabled = false;
+		nBtn.disabled = false;
 		let touch = e.touches[0];
 		drawing = true;
-		lastPoint={ x: touch.clientX-container.offsetLeft, y: touch.clientY-container.offsetTop };
+		lastPoint={ x: touch.clientX-c.offsetLeft, y: touch.clientY-c.offsetTop };
 	};
 
 	const touchmove = (e) => {
 		e.preventDefault();
 		let touch = e.touches[0];
 		if (drawing) {
-			let currentPoint={ x: touch.clientX-container.offsetLeft, y: touch.clientY-container.offsetTop };
-			ctx.beginPath();
-			ctx.moveTo(lastPoint.x, lastPoint.y);
-			ctx.lineTo(currentPoint.x, currentPoint.y);
-			ctx.stroke();
+			let currentPoint={ x: touch.clientX-c.offsetLeft, y: touch.clientY-c.offsetTop };
+			context.beginPath();
+			context.moveTo(lastPoint.x, lastPoint.y);
+			context.lineTo(currentPoint.x, currentPoint.y);
+			context.stroke();
 			lastPoint = currentPoint;
 		}
 	};

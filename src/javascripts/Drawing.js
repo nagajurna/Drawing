@@ -72,7 +72,7 @@ function Drawing() {
 	window.addEventListener("load", function(e) {
 		window. scrollTo(0, 0);
 		if(e.currentTarget.innerWidth < 768) {
-			flash(document.getElementById("flash"), "Draw !");
+			flash(document.getElementById("flash"), "Draw !",1500);
 		} 
 		
 	}, false);
@@ -123,7 +123,7 @@ function Drawing() {
 			strokeStyleSelect.disabled = true;
 			document.body.className = "image";
 			e.target.innerHTML = "To drawing";
-			flash(document.getElementById("flash"), 'Long touch to save');
+			flash(document.getElementById("flash"), 'Long touch to save',1200);
 		} else {
 			im = false;
 			lineWidthSelect.disabled = false;
@@ -135,11 +135,11 @@ function Drawing() {
 	
 	convertBtn.addEventListener('click', convert, false);
 	
-	const flash = (el,message) => {
+	const flash = (el,message,ms) => {
 		el.innerHTML = message;
 		el.style.display = "block";
 		el.style.left = (container.offsetWidth-el.offsetWidth)/2 + "px";
-		window.setTimeout(() => { el.style.display = "none"; },1200);
+		window.setTimeout(() => { el.style.display = "none"; },ms);
 	};
 
 	//new
