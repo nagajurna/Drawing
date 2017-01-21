@@ -155,12 +155,14 @@ function Drawing() {
 		ctx.canvas.width = container.offsetWidth;
 		ctx.canvas.height = container.offsetHeight;
 		ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
-		let options = strokeStyleSelect.getElementsByTagName("option");
-		for(let i=0; i<options.length; i++) {
-			if(options[i].value==='#000') {
-				options[i].selected = true;
-			} else {
-				options[i].selected = false;
+		if(strokeStyleSelect.value==="#fff") {
+			let options = strokeStyleSelect.getElementsByTagName("option");
+			for(let i=0; i<options.length; i++) {
+				if(options[i].value==='#000') {
+					options[i].selected = true;
+				} else {
+					options[i].selected = false;
+				}
 			}
 		}
 		ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
