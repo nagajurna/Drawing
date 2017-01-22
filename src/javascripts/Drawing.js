@@ -54,8 +54,6 @@ function Drawing() {
 		convertBtn.disabled = true;
 		saveBtn.disabled = true;
 		newBtn.disabled = true;
-		//previousBtn.disabled = true;
-		//nextBtn.disabled = true;
 		//size
 		size.innerHTML = ctx.canvas.width + "px X " + ctx.canvas.height + "px";
 	};
@@ -182,8 +180,8 @@ function Drawing() {
 	
 	newBtn.addEventListener('click', newPage, false);
 	
-	//history back
-	const historyBackwards = (e) => {
+	//history backward
+	const historyBackward = (e) => {
 		let current = historyService.getCurrent();
 		historyService.setCurrent(current-1);
 		
@@ -199,6 +197,8 @@ function Drawing() {
 			ctx.lineJoin = ctx.lineCap = 'round';
 			ctx.drawImage(img,0,0);
 			position();
+			//size
+			size.innerHTML = img.width + "px X " + img.height + "px";
 		}
 		img.src = history[historyService.getCurrent()];
 		
@@ -208,7 +208,8 @@ function Drawing() {
 		nextBtn.disabled = false;
 	}
 	
-	const historyForwards = (e) => {
+	//history forward
+	const historyForward = (e) => {
 		let current = historyService.getCurrent();
 		historyService.setCurrent(current+1);
 		
@@ -224,6 +225,8 @@ function Drawing() {
 			ctx.lineJoin = ctx.lineCap = 'round';
 			ctx.drawImage(img,0,0);
 			position();
+			//size
+			size.innerHTML = img.width + "px X " + img.height + "px";
 		}
 		img.src = history[historyService.getCurrent()];
 		
@@ -233,6 +236,6 @@ function Drawing() {
 		previousBtn.disabled = false;
 	}
 	
-	previousBtn.addEventListener('click', historyBackwards, false);
-	nextBtn.addEventListener('click', historyForwards, false);
+	previousBtn.addEventListener('click', historyBackward, false);
+	nextBtn.addEventListener('click', historyForward, false);
 }
