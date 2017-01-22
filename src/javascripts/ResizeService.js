@@ -1,4 +1,4 @@
-function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect,size) {
+function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect,size,historyService,previousBtn) {
 
 	let seResize = false;
 	
@@ -76,6 +76,8 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			var img = new Image();
 			img.onload = function() {
 				ctx.drawImage(img,0,0, ctx.canvas.width, ctx.canvas.height,0,0,ctx.canvas.width,ctx.canvas.height);
+				//add to history
+				historyService.setHistory(ctx.canvas.toDataURL(), {reset: false});
 			}
 			img.src = data;
 			ctx.lineWidth = lineWidthSelect.value;
@@ -96,11 +98,13 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			let img = new Image();
 			img.onload = function() {
 				ctx.drawImage(img,img.width-ctx.canvas.width,img.height-ctx.canvas.height, ctx.canvas.width, ctx.canvas.height,0,0,ctx.canvas.width,ctx.canvas.height);
+				//add to history
+				historyService.setHistory(ctx.canvas.toDataURL(), {reset: false});
 			}
 			img.src = data;
 			ctx.lineWidth = lineWidthSelect.value;
 			ctx.strokeStyle = strokeStyleSelect.value;
-			ctx.lineJoin = ctx.lineCap = 'round';
+			ctx.lineJoin = ctx.lineCap = 'round';		
 		}
 	};
 	

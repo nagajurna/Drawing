@@ -14,6 +14,8 @@ function Drawing() {
 	const convertBtn = document.getElementById("convert");
 	const saveBtn = document.getElementById("save");
 	const newBtn = document.getElementById("new");
+	const previousBtn = document.getElementById("previous");
+	const nextBtn = document.getElementById("next");
 	//selects
 	const lineWidthSelect = document.getElementById("lineWidthSelect");
 	const strokeStyleSelect = document.getElementById("strokeStyleSelect");
@@ -22,8 +24,9 @@ function Drawing() {
 	//mode image = false (=> mode canvas=true)
 	let im = false;
 	//Services
-	let drawService = DrawService(container,ctx,convertBtn,saveBtn,newBtn);
-	let resizeService = ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect,size);
+	let historyService = new HistoryService(previousBtn,nextBtn);
+	let drawService = DrawService(container,ctx,convertBtn,saveBtn,newBtn,historyService);
+	let resizeService = ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect,size,historyService);
 	let dragAndDropService = DragAndDropService(container,nwHandle,seHandle,dragHandle);
 	
 	//load
@@ -36,6 +39,8 @@ function Drawing() {
 		ctx.lineJoin = ctx.lineCap = 'round';
 		ctx.fillStyle="#ffffff";
 		ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
+		//history
+		historyService.setHistory(canvas.toDataURL(), {reset: true});
 		//container position left
 		container.style.left = (window.innerWidth-container.offsetWidth)/2 + "px";
 		//handles positions
@@ -49,6 +54,8 @@ function Drawing() {
 		convertBtn.disabled = true;
 		saveBtn.disabled = true;
 		newBtn.disabled = true;
+		//previousBtn.disabled = true;
+		//nextBtn.disabled = true;
 		//size
 		size.innerHTML = ctx.canvas.width + "px X " + ctx.canvas.height + "px";
 	};
@@ -150,6 +157,7 @@ function Drawing() {
 		newBtn.disabled = true;
 		lineWidthSelect.disabled = false;
 		strokeStyleSelect.disabled = false;
+		previousBtn.disabled = true;
 		document.body.className = "canvas";
 		convertBtn.innerHTML = "To image";
 		ctx.canvas.width = container.offsetWidth;
@@ -169,7 +177,62 @@ function Drawing() {
 		ctx.lineJoin = ctx.lineCap = 'round';
 		ctx.fillStyle="#ffffff";
 		ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
+		historyService.setHistory(canvas.toDataURL(), {reset: true});
 	};
 	
 	newBtn.addEventListener('click', newPage, false);
+	
+	//history back
+	const historyBackwards = (e) => {
+		let current = historyService.getCurrent();
+		historyService.setCurrent(current-1);
+		
+		var img = new Image();
+		var history = historyService.getHistory();
+		img.onload = function() {
+			container.style.width = img.width + "px";
+			container.style.height = img.height + "px";
+			ctx.canvas.width = img.width;
+			ctx.canvas.height = img.height;
+			ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
+			ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
+			ctx.lineJoin = ctx.lineCap = 'round';
+			ctx.drawImage(img,0,0);
+			position();
+		}
+		img.src = history[historyService.getCurrent()];
+		
+		if(historyService.getCurrent()===0) {
+			e.target.disabled = true;
+		}
+		nextBtn.disabled = false;
+	}
+	
+	const historyForwards = (e) => {
+		let current = historyService.getCurrent();
+		historyService.setCurrent(current+1);
+		
+		var img = new Image();
+		var history = historyService.getHistory();
+		img.onload = function() {
+			container.style.width = img.width + "px";
+			container.style.height = img.height + "px";
+			ctx.canvas.width = img.width;
+			ctx.canvas.height = img.height;
+			ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
+			ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
+			ctx.lineJoin = ctx.lineCap = 'round';
+			ctx.drawImage(img,0,0);
+			position();
+		}
+		img.src = history[historyService.getCurrent()];
+		
+		if(historyService.getCurrent()===history.length-1) {
+			e.target.disabled = true;
+		}
+		previousBtn.disabled = false;
+	}
+	
+	previousBtn.addEventListener('click', historyBackwards, false);
+	nextBtn.addEventListener('click', historyForwards, false);
 }
