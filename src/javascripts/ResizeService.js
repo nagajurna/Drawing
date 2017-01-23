@@ -79,7 +79,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			img.onload = function() {
 				ctx.drawImage(img,0,0, ctx.canvas.width, ctx.canvas.height,0,0,ctx.canvas.width,ctx.canvas.height);
 				//add to history
-				historyService.setHistory({ url: data, top: container.offsetTop, left: container.offsetLeft }, {reset: false});
+				historyService.setHistory({ url: ctx.canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
 			}
 			img.src = data;
 			ctx.lineWidth = lineWidthSelect.value;
@@ -101,7 +101,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			img.onload = function() {
 				ctx.drawImage(img,img.width-ctx.canvas.width,img.height-ctx.canvas.height, ctx.canvas.width, ctx.canvas.height,0,0,ctx.canvas.width,ctx.canvas.height);
 				//add to history
-				historyService.setHistory({ url: data, top: container.offsetTop, left: container.offsetLeft }, {reset: false});
+				historyService.setHistory({ url: ctx.canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
 			}
 			img.src = data;
 			ctx.lineWidth = lineWidthSelect.value;
