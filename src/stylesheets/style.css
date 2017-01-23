@@ -33,7 +33,7 @@ body {
 	#container {
 		top: 50px;
 		width: 75%;
-		height: 85%;
+		height: 80%;
 		box-shadow: 8px 8px 10px -5px #aaa;
 	}
 }
@@ -160,7 +160,7 @@ select.control {
 	width: 89px;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
 	#convert {
 		display: none;
 	}
@@ -170,7 +170,7 @@ select.control {
 	display: none;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
 	#save {
 		display: inline-block;
 	}

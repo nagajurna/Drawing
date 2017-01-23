@@ -32,7 +32,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
 			//size
-			size.innerHTML = w + "px X " + h + "px";
+			size.innerHTML = Math.round(w) + "px X " + Math.round(h) + "px";
 			
 		} else if(nwResize===true) {
 			if(e.clientY < 20 || e.clientX < 20) { return; }
@@ -59,7 +59,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
 			//size
-			size.innerHTML = contWidth + "px X " + contHeight + "px";
+			size.innerHTML = Math.round(contWidth) + "px X " + Math.round(contHeight) + "px";
 		}
 	};
 	
@@ -123,6 +123,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 	const touchmove = (e) => {
 		let touch = e.touches[0];
 		if(seResize===true) {
+			if(touch.clientY > window.innerHeight - 50 - 20 || touch.clientX > window.innerWidth - 20) { return; }
 			e.preventDefault();
 			//resize container
 			let h = container.offsetHeight - (container.offsetHeight + container.offsetTop - touch.clientY);
@@ -136,8 +137,11 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			seHandle.style.left = container.offsetLeft + container.offsetWidth + "px";
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
+			//size
+			size.innerHTML = Math.round(w) + "px X " + Math.round(h) + "px";
 			
 		} else if(nwResize===true) {
+			if(touch.clientY < 20 || touch.clientX < 20) { return; }
 			e.preventDefault();
 			let lm = container.offsetLeft - (container.offsetLeft - touch.clientX);
 			let tm = container.offsetTop - (container.offsetTop - touch.clientY);
@@ -159,6 +163,8 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			seHandle.style.left = container.offsetLeft + container.offsetWidth + "px";
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
+			//size
+			size.innerHTML = Math.round(w) + "px X " + Math.round(h) + "px";
 		}
 	};
 	
@@ -177,6 +183,8 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			let img = new Image();
 			img.onload = function() {
 				ctx.drawImage(img,0,0, ctx.canvas.width, ctx.canvas.height,0,0,ctx.canvas.width,ctx.canvas.height);
+				//add to history
+				historyService.setHistory({ url: ctx.canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
 			}
 			img.src = data;
 		} else if(nwResize===true) {
@@ -195,6 +203,8 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			let img = new Image();
 			img.onload = function() {
 				ctx.drawImage(img,img.width-ctx.canvas.width,img.height-ctx.canvas.height, ctx.canvas.width, ctx.canvas.height,0,0,ctx.canvas.width,ctx.canvas.height);
+				//add to history
+				historyService.setHistory({ url: ctx.canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
 			}
 			img.src = data;
 		}
