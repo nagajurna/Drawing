@@ -11,6 +11,13 @@
 </head>
 <body class="canvas">
 	
+	<nav id="nav-top">
+		<div id="controls-top">
+			<button class="control left" type="button" id="new-top" disabled>New</button>
+			<button class="control right" type="button" id="convert" disabled>Convert to image</button>
+		</div>
+	</nav>
+	
 	<div id="container">
 		<canvas id="canvas" >Sorry, no support in your browser !</canvas>
 		<img src="" id="image" />
@@ -23,15 +30,12 @@
 	<div id="nwHandle"></div>
 	<div id="seHandle"></div>
 	
-	<nav>
+	<nav id="nav-bottom">
 		<div id="size" class="control"></div>
 		<div id="controls">
 			<ul>
 				<li>
 					<button class="control" type="button" id="new" disabled>New</button>
-				</li>
-				<li>
-					<button class="control" type="button" id="convert" disabled>To image</button>
 				</li>
 				<li>
 					<button class="control" type="button" id="save" disabled>Save</button>
@@ -68,10 +72,10 @@
 					</select>
 				</li>
 				<li>
-					<button class="control" type="button" id="previous">Undo</button>
+					<button class="control" type="button" id="undo">Undo</button>
 				</li>
 				<li>
-					<button class="control" type="button" id="next">Redo</button>
+					<button class="control" type="button" id="redo">Redo</button>
 				</li>
 			</ul>
 		</div>

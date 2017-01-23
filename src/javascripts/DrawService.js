@@ -1,4 +1,4 @@
-function DrawService(container,ctx,convertBtn,saveBtn,newBtn,historyService,previousBtn) {
+function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historyService,previousBtn) {
 	
 	let canvas = ctx.canvas;
 	
@@ -14,6 +14,7 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,historyService,prev
 			convertBtn.disabled = false;
 			saveBtn.disabled = false;
 			newBtn.disabled = false;
+			newTopBtn.disabled = false;
 			drawing = true;
 			lastPoint={ x: e.clientX-container.offsetLeft, y: e.clientY-container.offsetTop };
 			ctx.beginPath();
@@ -46,6 +47,7 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,historyService,prev
 		convertBtn.disabled = false;
 		saveBtn.disabled = false;
 		newBtn.disabled = false;
+		newTopBtn.disabled = false;
 		let touch = e.touches[0];
 		drawing = true;
 		lastPoint={ x: touch.clientX-container.offsetLeft, y: touch.clientY-container.offsetTop };

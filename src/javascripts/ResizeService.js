@@ -143,19 +143,19 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 		} else if(nwResize===true) {
 			if(touch.clientY < 20 || touch.clientX < 20) { return; }
 			e.preventDefault();
-			let lm = container.offsetLeft - (container.offsetLeft - touch.clientX);
-			let tm = container.offsetTop - (container.offsetTop - touch.clientY);
-			let w = container.offsetWidth + (container.offsetLeft - lm);
-			let h =  container.offsetHeight + (container.offsetTop - tm);
-			let lp = canvas.offsetLeft + (container.offsetLeft - lm);
-			let tp = canvas.offsetTop + (container.offsetTop - tm);
+			let contLeft = touch.clientX;
+			let contTop = touch.clientY;
+			let contWidth = container.offsetWidth + (container.offsetLeft - contLeft);
+			let contHeight =  container.offsetHeight + (container.offsetTop - contTop);
+			let canvLeft = ctx.canvas.offsetLeft + (container.offsetLeft - contLeft);
+			let canvTop = ctx.canvas.offsetTop + (container.offsetTop - contTop);
 			//resize and position of container and canvas
-			container.style.left = lm + "px";
-			container.style.top = tm + "px";
-			container.style.width = w + "px";
-			container.style.height = h + "px";
-			ctx.canvas.style.left = lp + "px";
-			ctx.canvas.style.top = tp + "px";
+			container.style.left = contLeft + "px";
+			container.style.top = contTop + "px";
+			container.style.width = contWidth + "px";
+			container.style.height = contHeight + "px";
+			ctx.canvas.style.left = canvLeft + "px";
+			ctx.canvas.style.top = canvTop + "px";
 			//position handles
 			nwHandle.style.top = container.offsetTop-nwHandle.offsetHeight + "px";
 			nwHandle.style.left = container.offsetLeft-nwHandle.offsetWidth + "px";
