@@ -27,7 +27,6 @@ class HistoryService {
 			this._previousBtn.disabled = false;
 			this._nextBtn.disabled = true;
 		}
-		console.log(this._history);
 	}
 	
 	getHistory()  {

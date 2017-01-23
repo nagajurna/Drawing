@@ -65,8 +65,10 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,historyService,prev
 	};
 
 	const touchend = (e) => {
+		//if(drawing===true) {
+			//historyService.setHistory({ url: canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
+		//}
 		drawing = false;
-		historyService.setHistory({ url: canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
 	};
 	
 	canvas.addEventListener('mouseout', () => { drawing = false; }, false);
