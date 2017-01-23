@@ -36,8 +36,10 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,historyService,prev
 	};
 	
 	const mouseup = () => {
+		if(drawing===true) {
+			historyService.setHistory(canvas.toDataURL(), {reset: false});
+		}
 		drawing = false;
-		historyService.setHistory(canvas.toDataURL(), {reset: false});
 	};
 	
 	const touchstart = (e) => {
