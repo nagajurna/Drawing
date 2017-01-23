@@ -1,8 +1,8 @@
 class HistoryService {
 	
-	constructor(previousBtn,nextBtn) {
-		this._previousBtn = previousBtn;
-		this._nextBtn = nextBtn;
+	constructor(undoBtn,redoBtn) {
+		this._undoBtn = undoBtn;
+		this._redoBtn = redoBtn;
 		this._current = null;
 		this._history = [];
 	}
@@ -12,8 +12,8 @@ class HistoryService {
 			this._history.length = 0;
 			this._history.push(datas);
 			this.setCurrent(this._history.length-1);
-			this._previousBtn.disabled = true;
-			this._nextBtn.disabled = true;
+			this._undoBtn.disabled = true;
+			this._redoBtn.disabled = true;
 		} else {
 			if(this.getCurrent()===this._history.length-1) {
 				if(this._history.push(datas) > 50) {
@@ -24,8 +24,8 @@ class HistoryService {
 				this._history.push(datas);
 			}
 			this.setCurrent(this._history.length-1);
-			this._previousBtn.disabled = false;
-			this._nextBtn.disabled = true;
+			this._undoBtn.disabled = false;
+			this._redoBtn.disabled = true;
 		}
 	}
 	

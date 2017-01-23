@@ -14,8 +14,9 @@ function Drawing() {
 	const convertBtn = document.getElementById("convert");
 	const saveBtn = document.getElementById("save");
 	const newBtn = document.getElementById("new");
-	const previousBtn = document.getElementById("previous");
-	const nextBtn = document.getElementById("next");
+	const newTopBtn = document.getElementById("new-top");
+	const undoBtn = document.getElementById("undo");
+	const redoBtn = document.getElementById("redo");
 	//selects
 	const lineWidthSelect = document.getElementById("lineWidthSelect");
 	const strokeStyleSelect = document.getElementById("strokeStyleSelect");
@@ -24,8 +25,8 @@ function Drawing() {
 	//mode image = false (=> mode canvas=true)
 	let im = false;
 	//Services
-	let historyService = new HistoryService(previousBtn,nextBtn);
-	let drawService = DrawService(container,ctx,convertBtn,saveBtn,newBtn,historyService);
+	let historyService = new HistoryService(undoBtn,redoBtn);
+	let drawService = DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historyService);
 	let resizeService = ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect,size,historyService);
 	let dragAndDropService = DragAndDropService(container,nwHandle,seHandle,dragHandle);
 	
@@ -54,6 +55,7 @@ function Drawing() {
 		convertBtn.disabled = true;
 		saveBtn.disabled = true;
 		newBtn.disabled = true;
+		newTopBtn.disabled = true;
 		//size
 		size.innerHTML = ctx.canvas.width + "px X " + ctx.canvas.height + "px";
 	};
@@ -128,29 +130,28 @@ function Drawing() {
 			image.src = ctx.canvas.toDataURL('image/png');
 			lineWidthSelect.disabled = true;
 			strokeStyleSelect.disabled = true;
-			nextBtn.disabled = true;
-			previousBtn.disabled = true;
+			redoBtn.disabled = true;
+			undoBtn.disabled = true;
 			document.body.className = "image";
-			e.target.innerHTML = "To drawing";
+			e.target.innerHTML = "Convert to drawing";
 			flash(document.getElementById("flash"), 'Long touch to save',1200);
 		} else {
 			im = false;
 			lineWidthSelect.disabled = false;
 			strokeStyleSelect.disabled = false;
-			//conditions to add !!!
+			//history buttons
 			let current = historyService.getCurrent();
 			let history = historyService.getHistory();
 			if(current===0) {
-				nextBtn.disabled = false;
+				redoBtn.disabled = false;
 			} else if(current===history.length-1) {
-				previousBtn.disabled = false;
+				undoBtn.disabled = false;
 			} else {
-				nextBtn.disabled = false;
-				previousBtn.disabled = false;
+				redoBtn.disabled = false;
+				undoBtn.disabled = false;
 			}
-			
 			document.body.className = "canvas";
-			e.target.innerHTML = "To image";
+			e.target.innerHTML = "Convert to image";
 		}
 	};
 	
@@ -169,11 +170,12 @@ function Drawing() {
 		convertBtn.disabled = true;
 		saveBtn.disabled = true;
 		newBtn.disabled = true;
+		newTopBtn.disabled = true;
 		lineWidthSelect.disabled = false;
 		strokeStyleSelect.disabled = false;
-		previousBtn.disabled = true;
+		undoBtn.disabled = true;
 		document.body.className = "canvas";
-		convertBtn.innerHTML = "To image";
+		convertBtn.innerHTML = "Convert to image";
 		ctx.canvas.width = container.offsetWidth;
 		ctx.canvas.height = container.offsetHeight;
 		ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
@@ -195,6 +197,7 @@ function Drawing() {
 	};
 	
 	newBtn.addEventListener('click', newPage, false);
+	newTopBtn.addEventListener('click', newPage, false);
 	
 	//history backward
 	const historyBackward = (e) => {
@@ -224,7 +227,7 @@ function Drawing() {
 		if(historyService.getCurrent()===0) {
 			e.target.disabled = true;
 		}
-		nextBtn.disabled = false;
+		redoBtn.disabled = false;
 	}
 	
 	//history forward
@@ -255,9 +258,9 @@ function Drawing() {
 		if(historyService.getCurrent()===history.length-1) {
 			e.target.disabled = true;
 		}
-		previousBtn.disabled = false;
+		undoBtn.disabled = false;
 	}
 	
-	previousBtn.addEventListener('click', historyBackward, false);
-	nextBtn.addEventListener('click', historyForward, false);
+	undoBtn.addEventListener('click', historyBackward, false);
+	redoBtn.addEventListener('click', historyForward, false);
 }

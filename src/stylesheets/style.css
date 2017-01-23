@@ -18,12 +18,12 @@ body {
 
 #container {
 	position: absolute;
-	top: 0px;
+	top: 40px;
 	left: 0px;
 	width: 100%;
-	height: -webkit-calc(100% - 50px);
-	height: -moz-calc(100% - 50px);
-	height: calc(100% - 50px);
+	height: -webkit-calc(100% - 90px);
+	height: -moz-calc(100% - 90px);
+	height: calc(100% - 90px);
 	overflow: hidden;
 	background-color: #fff;
 }
@@ -31,9 +31,9 @@ body {
 @media only screen and (min-width: 768px) {
 
 	#container {
-		top: 50px;
+		top: 80px;
 		width: 75%;
-		height: 80%;
+		height: 75%;
 		box-shadow: 8px 8px 10px -5px #aaa;
 	}
 }
@@ -117,7 +117,50 @@ body.image #image {
 	}
 }
 
-nav {
+#nav-top {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 40px;
+	background-color: #333;
+}
+
+#controls-top {
+	margin-top: 6px;
+}
+
+.control.left, .control.right {
+	vertical-align: middle;
+	border: none;
+	border-radius: 0;
+	background-color: transparent;
+	color: #fff;
+	padding: 5px 8px;
+}
+
+.control.left:focus, .control.right:focus {
+	outline: 0;
+}
+
+.control.left {
+	float: left;
+	margin-left: 10px;
+}
+
+.control.right {
+	float: right;
+	margin-right: 10px;
+}
+
+
+@media only screen and (min-width: 769px) {
+	#nav-top {
+		display: none;
+	}
+}
+
+#nav-bottom {
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
@@ -141,7 +184,6 @@ nav {
 	
 }
 
-
 .control {
 	display: inline-block;
 	font-size: 13px;
@@ -158,17 +200,16 @@ select.control {
 	display: inline-block;
 }
 
-
-#convert {
-	display: inline-block;
-	width: 89px;
+#new {
+	display: none;
 }
 
 @media only screen and (min-width: 769px) {
-	#convert {
-		display: none;
+	#new {
+		display: inline-block;
 	}
 }
+
 
 #save {
 	display: none;
@@ -206,11 +247,6 @@ select.control {
 }
 
 #previous, #next {
-	display: none;
+	display: inline-block;
 }
 
-@media only screen and (min-width: 768px) {
-	#previous, #next {
-		display: inline-block;
-	}
-}
