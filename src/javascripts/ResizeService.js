@@ -1,4 +1,4 @@
-function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect,size,historyService,previousBtn) {
+function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelect,strokeStyleSelect,size,historyService) {
 
 	let seResize = false;
 	
@@ -9,13 +9,14 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 		if(e.target.id==='seHandle') {
 			seResize = true;
 		}
-		if(e.target.id==='nwHandle') {
+		if(e.currentTarget.id==='nwHandle') {
 			nwResize = true;
 		}
 	};
 	
 	const mousemove = (e) => {
 		if(seResize===true) {
+			if(e.clientY > window.innerHeight - 50 - 20 || e.clientX > window.innerWidth - 20) { return; }
 			e.preventDefault();
 			e.target.style.cursor = "nwse-resize";
 			//resize container
@@ -34,21 +35,22 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			size.innerHTML = w + "px X " + h + "px";
 			
 		} else if(nwResize===true) {
+			if(e.clientY < 20 || e.clientX < 20) { return; }
 			e.preventDefault();
 			e.target.style.cursor = "nwse-resize";
-			let lm = container.offsetLeft - (container.offsetLeft - e.clientX);
-			let tm = container.offsetTop - (container.offsetTop - e.clientY);
-			let w = container.offsetWidth + (container.offsetLeft - lm);
-			let h =  container.offsetHeight + (container.offsetTop - tm);
-			let lp = canvas.offsetLeft + (container.offsetLeft - lm);
-			let tp = canvas.offsetTop + (container.offsetTop - tm);
+			let contLeft = e.clientX;
+			let contTop = e.clientY;
+			let contWidth = container.offsetWidth + (container.offsetLeft - contLeft);
+			let contHeight =  container.offsetHeight + (container.offsetTop - contTop);
+			let canvLeft = ctx.canvas.offsetLeft + (container.offsetLeft - contLeft);
+			let canvTop = ctx.canvas.offsetTop + (container.offsetTop - contTop);
 			//resize and position of container and canvas
-			container.style.left = lm + "px";
-			container.style.top = tm + "px";
-			container.style.width = w + "px";
-			container.style.height = h + "px";
-			ctx.canvas.style.left = lp + "px";
-			ctx.canvas.style.top = tp + "px";
+			container.style.left = contLeft + "px";
+			container.style.top = contTop + "px";
+			container.style.width = contWidth + "px";
+			container.style.height = contHeight + "px";
+			ctx.canvas.style.left = canvLeft + "px";
+			ctx.canvas.style.top = canvTop + "px";
 			//position handles
 			nwHandle.style.top = container.offsetTop-nwHandle.offsetHeight + "px";
 			nwHandle.style.left = container.offsetLeft-nwHandle.offsetWidth + "px";
@@ -57,7 +59,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
 			//size
-			size.innerHTML = w + "px X " + h + "px";
+			size.innerHTML = contWidth + "px X " + contHeight + "px";
 		}
 	};
 	
@@ -77,7 +79,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			img.onload = function() {
 				ctx.drawImage(img,0,0, ctx.canvas.width, ctx.canvas.height,0,0,ctx.canvas.width,ctx.canvas.height);
 				//add to history
-				historyService.setHistory({ url: ctx.canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
+				historyService.setHistory({ url: data, top: container.offsetTop, left: container.offsetLeft }, {reset: false});
 			}
 			img.src = data;
 			ctx.lineWidth = lineWidthSelect.value;
@@ -99,7 +101,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			img.onload = function() {
 				ctx.drawImage(img,img.width-ctx.canvas.width,img.height-ctx.canvas.height, ctx.canvas.width, ctx.canvas.height,0,0,ctx.canvas.width,ctx.canvas.height);
 				//add to history
-				historyService.setHistory({ url: ctx.canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
+				historyService.setHistory({ url: data, top: container.offsetTop, left: container.offsetLeft }, {reset: false});
 			}
 			img.src = data;
 			ctx.lineWidth = lineWidthSelect.value;

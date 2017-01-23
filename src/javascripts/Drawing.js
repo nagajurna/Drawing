@@ -40,7 +40,7 @@ function Drawing() {
 		ctx.fillStyle="#ffffff";
 		ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
 		//container position
-		container.style.top = (window.innerWidth < 768 ? "0px": "50px");
+		//container.style.top = (window.innerWidth < 768 ? "0px": "50px");
 		container.style.left = (window.innerWidth-container.offsetWidth)/2 + "px";
 		//history
 		historyService.setHistory({ url: ctx.canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: true});
