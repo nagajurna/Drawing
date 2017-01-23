@@ -44,13 +44,18 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historySe
 	};
 	
 	const touchstart = (e) => {
+		e.preventDefault();
+		let touch = e.touches[0];
 		convertBtn.disabled = false;
 		saveBtn.disabled = false;
 		newBtn.disabled = false;
 		newTopBtn.disabled = false;
-		let touch = e.touches[0];
 		drawing = true;
 		lastPoint={ x: touch.clientX-container.offsetLeft, y: touch.clientY-container.offsetTop };
+		ctx.beginPath();
+		ctx.moveTo(lastPoint.x, lastPoint.y);
+		ctx.lineTo(lastPoint.x, lastPoint.y);
+		ctx.stroke();
 	};
 
 	const touchmove = (e) => {
@@ -66,7 +71,7 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historySe
 		}
 	};
 
-	const touchend = (e) => {
+	const touchend = () => {
 		if(drawing===true) {
 			historyService.setHistory({ url: canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
 		}
@@ -77,7 +82,7 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historySe
 	canvas.addEventListener("mousedown",mousedown, {capture: false});
 	canvas.addEventListener("mousemove",mousemove, {capture: false});
 	canvas.addEventListener("mouseup",mouseup, {capture: false});
-	canvas.addEventListener("touchstart",touchstart, {capture: false, passive: true});
+	canvas.addEventListener("touchstart",touchstart, {capture: false, passive: false});
 	canvas.addEventListener("touchmove",touchmove, {capture: false, passive: false});
 	canvas.addEventListener("touchend",touchend, {capture: false, passive: true});
 };
