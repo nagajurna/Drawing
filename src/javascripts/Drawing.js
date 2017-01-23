@@ -39,8 +39,7 @@ function Drawing() {
 		ctx.lineJoin = ctx.lineCap = 'round';
 		ctx.fillStyle="#ffffff";
 		ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
-		//container position
-		//container.style.top = (window.innerWidth < 768 ? "0px": "50px");
+		//container left position
 		container.style.left = (window.innerWidth-container.offsetWidth)/2 + "px";
 		//history
 		historyService.setHistory({ url: ctx.canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: true});
@@ -63,7 +62,6 @@ function Drawing() {
 
 	//resize
 	const handlesPosition = () => {
-		
 		nwHandle.style.top = (container.offsetTop-nwHandle.offsetHeight) + "px";
 		nwHandle.style.left = (container.offsetLeft-nwHandle.offsetWidth) + "px";
 		seHandle.style.top = (container.offsetTop+container.offsetHeight) + "px";
@@ -130,6 +128,8 @@ function Drawing() {
 			image.src = ctx.canvas.toDataURL('image/png');
 			lineWidthSelect.disabled = true;
 			strokeStyleSelect.disabled = true;
+			nextBtn.disabled = true;
+			previousBtn.disabled = true;
 			document.body.className = "image";
 			e.target.innerHTML = "To drawing";
 			flash(document.getElementById("flash"), 'Long touch to save',1200);
@@ -137,6 +137,18 @@ function Drawing() {
 			im = false;
 			lineWidthSelect.disabled = false;
 			strokeStyleSelect.disabled = false;
+			//conditions to add !!!
+			let current = historyService.getCurrent();
+			let history = historyService.getHistory();
+			if(current===0) {
+				nextBtn.disabled = false;
+			} else if(current===history.length-1) {
+				previousBtn.disabled = false;
+			} else {
+				nextBtn.disabled = false;
+				previousBtn.disabled = false;
+			}
+			
 			document.body.className = "canvas";
 			e.target.innerHTML = "To image";
 		}

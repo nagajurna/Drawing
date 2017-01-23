@@ -108,7 +108,11 @@ body.image #image {
 }
 
 @media only screen and (min-width: 768px) {
-	#dragHandle, #nwHandle, #seHandle {
+	body.image #dragHandle, body.image #nwHandle, body.image #seHandle {
+		display: none;
+	}
+	
+	body.canvas #dragHandle, body.canvas #nwHandle, body.canvas #seHandle {
 		display: block;
 	}
 }
