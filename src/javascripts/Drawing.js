@@ -39,10 +39,11 @@ function Drawing() {
 		ctx.lineJoin = ctx.lineCap = 'round';
 		ctx.fillStyle="#ffffff";
 		ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
-		//history
-		historyService.setHistory(canvas.toDataURL(), {reset: true});
-		//container position left
+		//container position
+		container.style.top = (window.innerWidth < 768 ? "0px": "50px");
 		container.style.left = (window.innerWidth-container.offsetWidth)/2 + "px";
+		//history
+		historyService.setHistory({ url: ctx.canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: true});
 		//handles positions
 		nwHandle.style.top = (container.offsetTop-nwHandle.offsetHeight) + "px";
 		nwHandle.style.left = (container.offsetLeft-nwHandle.offsetWidth) + "px";
@@ -61,8 +62,8 @@ function Drawing() {
 	document.addEventListener('DOMContentLoaded',init, false);
 
 	//resize
-	const position = () => {
-		container.style.left = (window.innerWidth-container.offsetWidth)/2 + "px";
+	const handlesPosition = () => {
+		
 		nwHandle.style.top = (container.offsetTop-nwHandle.offsetHeight) + "px";
 		nwHandle.style.left = (container.offsetLeft-nwHandle.offsetWidth) + "px";
 		seHandle.style.top = (container.offsetTop+container.offsetHeight) + "px";
@@ -71,7 +72,10 @@ function Drawing() {
 		dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
 	};
 	
-	window.addEventListener('resize', position, false);
+	window.addEventListener('resize', function() {
+		container.style.left = (window.innerWidth-container.offsetWidth)/2 + "px";
+		handlesPosition();
+	}, false);
 	
 	//others
 	window.addEventListener("load", function(e) {
@@ -175,7 +179,7 @@ function Drawing() {
 		ctx.lineJoin = ctx.lineCap = 'round';
 		ctx.fillStyle="#ffffff";
 		ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
-		historyService.setHistory(canvas.toDataURL(), {reset: true});
+		historyService.setHistory({ url: ctx.canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: true});
 	};
 	
 	newBtn.addEventListener('click', newPage, false);
@@ -187,20 +191,23 @@ function Drawing() {
 		
 		var img = new Image();
 		var history = historyService.getHistory();
+		let state = history[historyService.getCurrent()];
 		img.onload = function() {
 			container.style.width = img.width + "px";
 			container.style.height = img.height + "px";
+			container.style.top = state.top + "px";
+			container.style.left = state.left + "px";
 			ctx.canvas.width = img.width;
 			ctx.canvas.height = img.height;
 			ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
 			ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
 			ctx.lineJoin = ctx.lineCap = 'round';
 			ctx.drawImage(img,0,0);
-			position();
+			handlesPosition();
 			//size
 			size.innerHTML = img.width + "px X " + img.height + "px";
 		}
-		img.src = history[historyService.getCurrent()];
+		img.src = state.url;
 		
 		if(historyService.getCurrent()===0) {
 			e.target.disabled = true;
@@ -215,20 +222,23 @@ function Drawing() {
 		
 		var img = new Image();
 		var history = historyService.getHistory();
+		let state = history[historyService.getCurrent()];
 		img.onload = function() {
 			container.style.width = img.width + "px";
 			container.style.height = img.height + "px";
+			container.style.top = state.top + "px";
+			container.style.left = state.left + "px";
 			ctx.canvas.width = img.width;
 			ctx.canvas.height = img.height;
 			ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
 			ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
 			ctx.lineJoin = ctx.lineCap = 'round';
 			ctx.drawImage(img,0,0);
-			position();
+			handlesPosition();
 			//size
 			size.innerHTML = img.width + "px X " + img.height + "px";
 		}
-		img.src = history[historyService.getCurrent()];
+		img.src = state.url;
 		
 		if(historyService.getCurrent()===history.length-1) {
 			e.target.disabled = true;

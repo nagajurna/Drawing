@@ -17,7 +17,7 @@ gulp.task('scripts', () => {
             presets: ['es2015']
         }))
         .pipe(uglify())
-        .pipe(concat('all.js'))
+        .pipe(concat('script.js'))
         .pipe(gulp.dest('public/javascripts'));
 });
 
