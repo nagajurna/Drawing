@@ -82,7 +82,6 @@ body.image #image {
 	height: 100%;
 	width: 0px;
 	border-left: 2px solid #d5d5d5;
-
 }
 
 #nwHandle {
@@ -153,7 +152,6 @@ body.image #image {
 	margin-right: 10px;
 }
 
-
 @media only screen and (min-width: 769px) {
 	#nav-top {
 		display: none;
@@ -172,6 +170,7 @@ body.image #image {
 #controls {
 	margin-top: 12px;
 	text-align: center;
+	color: #000;
 }
 
 #controls > ul {
@@ -188,8 +187,8 @@ body.image #image {
 	display: inline-block;
 	font-size: 13px;
 	height: 30px;
-	padding-left: 2px;
-	padding-right: 2px;
+	padding-left: 3px;
+	padding-right: 3px;
 }
 
 .control[disabled] {
@@ -209,7 +208,6 @@ select.control {
 		display: inline-block;
 	}
 }
-
 
 #save {
 	display: none;

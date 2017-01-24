@@ -5,6 +5,7 @@ function DragAndDropService(container,nwHandleHandle,seHandle,dragHandle) {
 	const mousedown = (e) => {
 		e.preventDefault();
 		e.target.style.cursor = "move";
+		//distance client/container
 		datas.xDif = e.screenX - container.offsetLeft;
 		datas.yDif = e.screenY - container.offsetTop;
 	};
@@ -14,7 +15,7 @@ function DragAndDropService(container,nwHandleHandle,seHandle,dragHandle) {
 		if(datas.xDif) {
 			container.style.left = e.screenX - datas.xDif + "px";
 			container.style.top = e.screenY - datas.yDif + "px";
-			
+			//position handles
 			nwHandle.style.top = (container.offsetTop-nwHandle.offsetHeight) + "px";
 			nwHandle.style.left = (container.offsetLeft-nwHandle.offsetWidth) + "px";
 			seHandle.style.top = (container.offsetTop+container.offsetHeight) + "px";
@@ -33,6 +34,7 @@ function DragAndDropService(container,nwHandleHandle,seHandle,dragHandle) {
 	
 	const touchstart = (e) => {
 		let touch = e.touches[0];
+		//distance client/container
 		datas.xDif = touch.screenX - container.offsetLeft;
 		datas.yDif = touch.screenY - container.offsetTop;
 	};
@@ -43,7 +45,7 @@ function DragAndDropService(container,nwHandleHandle,seHandle,dragHandle) {
 		if(datas.xDif) {
 			container.style.left = touch.screenX - datas.xDif + "px";
 			container.style.top = touch.screenY - datas.yDif + "px";
-			
+			//position handles
 			nwHandle.style.top = (container.offsetTop-nwHandle.offsetHeight) + "px";
 			nwHandle.style.left = (container.offsetLeft-nwHandle.offsetWidth) + "px";
 			seHandle.style.top = (container.offsetTop+container.offsetHeight) + "px";

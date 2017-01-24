@@ -16,6 +16,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 	
 	const mousemove = (e) => {
 		if(seResize===true) {
+			//maximum move
 			if(e.clientY > window.innerHeight - 50 - 20 || e.clientX > window.innerWidth - 20) { return; }
 			e.preventDefault();
 			e.target.style.cursor = "nwse-resize";
@@ -31,13 +32,15 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			seHandle.style.left = container.offsetLeft + container.offsetWidth + "px";
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
-			//size
+			//display size
 			size.innerHTML = Math.round(w) + "px X " + Math.round(h) + "px";
 			
 		} else if(nwResize===true) {
+			//maximum move
 			if(e.clientY < 20 || e.clientX < 20) { return; }
 			e.preventDefault();
 			e.target.style.cursor = "nwse-resize";
+			//calculate position container + size container + position canvas
 			let contLeft = e.clientX;
 			let contTop = e.clientY;
 			let contWidth = container.offsetWidth + (container.offsetLeft - contLeft);
@@ -58,7 +61,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			seHandle.style.left = container.offsetLeft + container.offsetWidth + "px";
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
-			//size
+			//display size
 			size.innerHTML = Math.round(contWidth) + "px X " + Math.round(contHeight) + "px";
 		}
 	};
@@ -123,6 +126,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 	const touchmove = (e) => {
 		let touch = e.touches[0];
 		if(seResize===true) {
+			//maximum move
 			if(touch.clientY > window.innerHeight - 50 - 20 || touch.clientX > window.innerWidth - 20) { return; }
 			e.preventDefault();
 			//resize container
@@ -137,12 +141,14 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			seHandle.style.left = container.offsetLeft + container.offsetWidth + "px";
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
-			//size
+			//display size
 			size.innerHTML = Math.round(w) + "px X " + Math.round(h) + "px";
 			
 		} else if(nwResize===true) {
+			//maximum move
 			if(touch.clientY < 20 || touch.clientX < 20) { return; }
 			e.preventDefault();
+			//calculate position container + size container + position canvas
 			let contLeft = touch.clientX;
 			let contTop = touch.clientY;
 			let contWidth = container.offsetWidth + (container.offsetLeft - contLeft);
@@ -163,7 +169,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 			seHandle.style.left = container.offsetLeft + container.offsetWidth + "px";
 			dragHandle.style.top = container.offsetTop-dragHandle.offsetHeight + "px";
 			dragHandle.style.left = (container.offsetWidth-dragHandle.offsetWidth)/2 + container.offsetLeft + "px";
-			//size
+			//display size
 			size.innerHTML = Math.round(w) + "px X " + Math.round(h) + "px";
 		}
 	};
@@ -215,6 +221,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 	nwHandle.addEventListener('mousedown', mousedown, {capture: false});
 	document.addEventListener('mousemove', mousemove, {capture: false});
 	document.addEventListener('mouseup', mouseup, {capture: false});
+	
 	seHandle.addEventListener('touchstart', touchstart, {capture: false});
 	nwHandle.addEventListener('touchstart', touchstart, {capture: false});
 	document.addEventListener('touchmove', touchmove, {capture: false, passive: false});
