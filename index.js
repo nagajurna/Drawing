@@ -1,26 +1,26 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var favicon = require('serve-favicon');
-var fs = require('fs');
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
+const fs = require('fs');
+const app = express();
 
 app.use(express.static('public'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 
-app.post('/save', function (req, res) {
-	var img = req.body.data;
-	var buf = new Buffer(img, 'base64');
-	var d = new Date();
-	var t = d.getTime();
-	var name = 'image_' + t;
-	fs.writeFile('public/temp/' + name + '.png', buf, function(err) {
+app.post('/save', (req, res) => {
+	let img = req.body.data;
+	let buf = new Buffer(img, 'base64');
+	let d = new Date();
+	let t = d.getTime();
+	let name = 'drawing_' + t;
+	fs.writeFile('public/temp/' + name + '.png', buf, (err) => {
 		if(err) {
 			return res.send(err);
 		} else {
 			res.setHeader('Content-Type', 'image/png');
 			res.setHeader('Content-disposition', 'attachment; filename=' + name + ".png");
-			res.download('public/temp/' + name + '.png', null, function(err) {
+			res.download('public/temp/' + name + '.png', null, (err) => {
 				if(err) {
 					return res.send(err);
 				} else {
@@ -31,9 +31,9 @@ app.post('/save', function (req, res) {
 	});
 });
 
-var port = process.env.PORT || '3000';
+let port = process.env.PORT || '3000';
 app.set('port', port);
 
-app.listen(port, function () {
+app.listen(port, () => {
   console.log('drawing listening on port ' + port);
 });

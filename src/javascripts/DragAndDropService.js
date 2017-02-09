@@ -2,7 +2,7 @@ function DragAndDropService(container,nwHandleHandle,seHandle,dragHandle) {
 
 	let datas = {};
 	
-	const mousedown = (e) => {
+	let mousedown = (e) => {
 		e.preventDefault();
 		e.target.style.cursor = "move";
 		//distance client/container
@@ -10,7 +10,7 @@ function DragAndDropService(container,nwHandleHandle,seHandle,dragHandle) {
 		datas.yDif = e.screenY - container.offsetTop;
 	};
 		
-	const mousemove = (e) => {
+	let mousemove = (e) => {
 		e.preventDefault();
 		if(datas.xDif) {
 			container.style.left = e.screenX - datas.xDif + "px";
@@ -25,21 +25,21 @@ function DragAndDropService(container,nwHandleHandle,seHandle,dragHandle) {
 		}
 	};
 		
-	const mouseup = (e) => {
+	let mouseup = (e) => {
 		e.preventDefault();
 		e.target.style.cursor = "grab";
 		e.target.style.cursor = "-webkit-grab";
 		datas = {};
 	};
 	
-	const touchstart = (e) => {
+	let touchstart = (e) => {
 		let touch = e.touches[0];
 		//distance client/container
 		datas.xDif = touch.screenX - container.offsetLeft;
 		datas.yDif = touch.screenY - container.offsetTop;
 	};
 	
-	const touchmove = (e) => {
+	let touchmove = (e) => {
 		let touch = e.touches[0];
 		e.preventDefault();
 		if(datas.xDif) {
@@ -55,7 +55,7 @@ function DragAndDropService(container,nwHandleHandle,seHandle,dragHandle) {
 		}
 	};
 	
-	const touchend = function(e) {
+	let touchend = function(e) {
 		datas = {};
 	};
 	

@@ -31,7 +31,7 @@ function Drawing() {
 	let dragAndDropService = DragAndDropService(container,nwHandle,seHandle,dragHandle);
 	
 	//load
-	const init = () => {
+	let init = () => {
 		//canvas
 		ctx.canvas.width = container.offsetWidth;
 		ctx.canvas.height = container.offsetHeight;
@@ -63,7 +63,7 @@ function Drawing() {
 	document.addEventListener('DOMContentLoaded',init, false);
 
 	//resize
-	const handlesPosition = () => {
+	let handlesPosition = () => {
 		nwHandle.style.top = (container.offsetTop-nwHandle.offsetHeight) + "px";
 		nwHandle.style.left = (container.offsetLeft-nwHandle.offsetWidth) + "px";
 		seHandle.style.top = (container.offsetTop+container.offsetHeight) + "px";
@@ -89,21 +89,21 @@ function Drawing() {
 	document.addEventListener("touchmove", function(e) { e.preventDefault() }, {passive: false});
 
 	//change line width
-	const setLineWidth = () => {
+	let setLineWidth = () => {
 		ctx.lineWidth = parseInt(lineWidthSelect.value);
 	};
 	
 	lineWidthSelect.addEventListener('change', setLineWidth, {capture: false});
 
-	//change line width
-	const setStrokeStyle = () => {
+	//change stroke style
+	let setStrokeStyle = () => {
 		ctx.strokeStyle = strokeStyleSelect.value;
 	};
 	
 	strokeStyleSelect.addEventListener('change', setStrokeStyle, {capture: false});
-
+	
 	//save
-	const save = () => {
+	let save = () => {
 		im = false;
 		let data = canvas.toDataURL().replace(/^data:image\/\w+;base64,/, "");
 		let dataInput = document.createElement("input");
@@ -124,7 +124,7 @@ function Drawing() {
 	saveBtn.addEventListener('click', save, false);
 	
 	//convert
-	const convert = (e) => {
+	let convert = (e) => {
 		if(im===false) {
 			im = true;	
 			image.src = ctx.canvas.toDataURL('image/png');
@@ -157,7 +157,7 @@ function Drawing() {
 	
 	convertBtn.addEventListener('click', convert, false);
 	
-	const flash = (el,message,ms) => {
+	let flash = (el,message,ms) => {
 		el.innerHTML = message;
 		el.style.display = "block";
 		el.style.left = (container.offsetWidth-el.offsetWidth)/2 + "px";
@@ -165,7 +165,7 @@ function Drawing() {
 	};
 
 	//new
-	const newPage = () => {
+	let newPage = () => {
 		im = false;
 		convertBtn.disabled = true;
 		saveBtn.disabled = true;
@@ -178,7 +178,7 @@ function Drawing() {
 		convertBtn.innerHTML = "Convert to image";
 		ctx.canvas.width = container.offsetWidth;
 		ctx.canvas.height = container.offsetHeight;
-		ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
+		ctx.lineWidth = parseInt(lineWidthSelect.value);
 		if(strokeStyleSelect.value==="#fff") {
 			let options = strokeStyleSelect.getElementsByTagName("option");
 			for(let i=0; i<options.length; i++) {
@@ -189,7 +189,7 @@ function Drawing() {
 				}
 			}
 		}
-		ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
+		ctx.strokeStyle = strokeStyleSelect.value;
 		ctx.lineJoin = ctx.lineCap = 'round';
 		ctx.fillStyle="#ffffff";
 		ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
@@ -200,7 +200,7 @@ function Drawing() {
 	newTopBtn.addEventListener('click', newPage, false);
 	
 	//history backward
-	const historyBackward = (e) => {
+	let historyBackward = (e) => {
 		let current = historyService.getCurrent();
 		historyService.setCurrent(current-1);
 		
@@ -214,8 +214,8 @@ function Drawing() {
 			container.style.left = state.left + "px";
 			ctx.canvas.width = img.width;
 			ctx.canvas.height = img.height;
-			ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
-			ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
+			ctx.lineWidth = parseInt(lineWidthSelect.value);
+			ctx.strokeStyle = strokeStyleSelect.value;
 			ctx.lineJoin = ctx.lineCap = 'round';
 			ctx.drawImage(img,0,0);
 			handlesPosition();
@@ -231,7 +231,7 @@ function Drawing() {
 	}
 	
 	//history forward
-	const historyForward = (e) => {
+	let historyForward = (e) => {
 		let current = historyService.getCurrent();
 		historyService.setCurrent(current+1);
 		
@@ -245,8 +245,8 @@ function Drawing() {
 			container.style.left = state.left + "px";
 			ctx.canvas.width = img.width;
 			ctx.canvas.height = img.height;
-			ctx.lineWidth = parseInt(document.getElementById("lineWidthSelect").value);
-			ctx.strokeStyle = document.getElementById("strokeStyleSelect").value;
+			ctx.lineWidth = parseInt(lineWidthSelect.value);
+			ctx.strokeStyle = strokeStyleSelect.value;
 			ctx.lineJoin = ctx.lineCap = 'round';
 			ctx.drawImage(img,0,0);
 			handlesPosition();

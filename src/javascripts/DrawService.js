@@ -7,8 +7,8 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historySe
 	let lastPoint = {};
 	
 	let currentPoint = {};
-		
-	const mousedown = (e) => {
+	
+	let mousedown = (e) => {
 		e.preventDefault();
 		if(e.which===1) {
 			drawing = true;
@@ -18,10 +18,12 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historySe
 			ctx.moveTo(lastPoint.x, lastPoint.y);
 			ctx.lineTo(lastPoint.x, lastPoint.y);
 			ctx.stroke();
+			
+			
 		}
 	};
 	
-	const mousemove = (e) => {
+	let mousemove = (e) => {
 		e.preventDefault();
 		if (drawing===true) {
 			currentPoint={ x: e.clientX-container.offsetLeft, y: e.clientY-container.offsetTop };
@@ -33,7 +35,7 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historySe
 		}
 	};
 	
-	const mouseup = () => {
+	let mouseup = () => {
 		if(drawing===true) {
 			//buttons disabled = false
 			convertBtn.disabled = false;
@@ -42,11 +44,12 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historySe
 			newTopBtn.disabled = false;
 			//add to history
 			historyService.setHistory({ url: canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
+			drawing = false;
 		}
-		drawing = false;
+		
 	};
 	
-	const touchstart = (e) => {
+	let touchstart = (e) => {
 		e.preventDefault();
 		let touch = e.touches[0];
 		drawing = true;
@@ -58,7 +61,7 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historySe
 		ctx.stroke();
 	};
 
-	const touchmove = (e) => {
+	let touchmove = (e) => {
 		e.preventDefault();
 		let touch = e.touches[0];
 		if (drawing) {
@@ -71,7 +74,7 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historySe
 		}
 	};
 
-	const touchend = () => {
+	let touchend = () => {
 		if(drawing===true) {
 			//buttons disabled = false
 			convertBtn.disabled = false;
@@ -80,8 +83,8 @@ function DrawService(container,ctx,convertBtn,saveBtn,newBtn,newTopBtn,historySe
 			newTopBtn.disabled = false;
 			//add to history
 			historyService.setHistory({ url: canvas.toDataURL(), top: container.offsetTop, left: container.offsetLeft }, {reset: false});
+			drawing = false;
 		}
-		drawing = false;
 	};
 	
 	canvas.addEventListener('mouseout', () => { drawing = false; }, false);

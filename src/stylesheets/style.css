@@ -189,7 +189,6 @@ body.image #image {
 	height: 30px;
 	padding-left: 3px;
 	padding-right: 3px;
-	
 }
 
 .control[disabled] {
@@ -217,6 +216,16 @@ select.control {
 
 @media only screen and (min-width: 769px) {
 	#save {
+		display: inline-block;
+	}
+}
+
+#opacitySelect {
+	display: none;
+}
+
+@media only screen and (min-width: 360px) {
+	#opacitySelect {
 		display: inline-block;
 	}
 }

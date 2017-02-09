@@ -4,7 +4,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 	
 	let nwResize = false;
 	
-	const mousedown = (e) => {
+	let mousedown = (e) => {
 		e.preventDefault();
 		if(e.target.id==='seHandle') {
 			seResize = true;
@@ -14,7 +14,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 		}
 	};
 	
-	const mousemove = (e) => {
+	let mousemove = (e) => {
 		if(seResize===true) {
 			//maximum move
 			if(e.clientY > window.innerHeight - 50 - 20 || e.clientX > window.innerWidth - 20) { return; }
@@ -66,7 +66,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 		}
 	};
 	
-	const mouseup = (e) => {
+	let mouseup = (e) => {
 		e.preventDefault();
 		if(seResize===true) {
 			seResize = false;
@@ -113,7 +113,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 		}
 	};
 	
-	const touchstart = (e) => {
+	let touchstart = (e) => {
 		let touch = e.touches[0];
 		if(touch.target.id==='seHandle') {
 			seResize = true;
@@ -123,7 +123,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 		}
 	};
 	
-	const touchmove = (e) => {
+	let touchmove = (e) => {
 		let touch = e.touches[0];
 		if(seResize===true) {
 			//maximum move
@@ -174,7 +174,7 @@ function ResizeService(container,ctx,nwHandle,seHandle,dragHandle,lineWidthSelec
 		}
 	};
 	
-	const touchend = (e) => {
+	let touchend = (e) => {
 		if(seResize===true) {
 			seResize = false;
 			//resize canvas and redraw
