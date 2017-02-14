@@ -4,7 +4,8 @@ const favicon = require('serve-favicon');
 const fs = require('fs');
 const app = express();
 
-app.use(express.static('public'));
+let oneWeek = 604800000;
+app.use(express.static('public', { maxAge: oneWeek }));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 
