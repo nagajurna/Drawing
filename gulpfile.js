@@ -4,6 +4,7 @@ const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const htmlmin = require('gulp-htmlmin');
+var sourcemaps = require('gulp-sourcemaps');
 
 const paths = {
 	scripts: 'src/javascripts/*.js',
@@ -13,11 +14,13 @@ const paths = {
  
 gulp.task('scripts', () => {
     return gulp.src(paths.scripts)
-        .pipe(babel({
-            presets: ['es2015']
-        }))
-        .pipe(uglify())
-        .pipe(concat('script.js'))
+		.pipe(sourcemaps.init())
+			.pipe(babel({
+				presets: ['es2015']
+			}))
+			.pipe(uglify())
+			.pipe(concat('script.js'))
+		.pipe(sourcemaps.write())
         .pipe(gulp.dest('public/javascripts'));
 });
 
